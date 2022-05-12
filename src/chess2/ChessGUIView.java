@@ -4,10 +4,16 @@
  */
 package chess2;
 
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 /**
  *
  * @author navjo
  */
-public class ChessGUIView {
+public class ChessGUIView extends JFrame
+{
+    private square[][] board;
+    
     
 }
