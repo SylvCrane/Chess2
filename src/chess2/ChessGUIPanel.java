@@ -5,6 +5,7 @@
 package chess2;
 
 import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -38,6 +39,7 @@ public class ChessGUIPanel extends JPanel
                     fileLocation.append("./resources/");
                     fileLocation.append(board[xIndex][yIndex].getPiece().pieceName);
                     fileLocation.append(".jpg");
+                    GUIBoard[xIndex][yIndex].image = new ImageIcon(fileLocation.toString()).getImage();
                 }
             }
         }
