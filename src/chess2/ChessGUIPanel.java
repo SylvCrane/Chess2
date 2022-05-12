@@ -11,9 +11,11 @@ import javax.swing.JPanel;
  *
  * @author navjo
  */
-public class ChessGUIView extends JFrame
+public class ChessGUIPanel extends JFrame
 {
-    private square[][] board;
+    private Square[][] board;
+    
+    
     
     
 }
