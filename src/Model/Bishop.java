@@ -4,104 +4,38 @@
  */
 package Model;
 
-import chess2.Direction;
-
 /**
  *
  * @author navjo
  */
 public class Bishop extends Piece{
     
-    public Bishop(String pieceName, int potential_moves, Direction direction, PlayerColour colour)
+    public Bishop(String pieceName, int potential_moves, PlayerColour colour)
     {
         super(pieceName);
         this.pieceName = pieceName;
         this.potential_moves = potential_moves;
-        this.direction = direction;
         this.colour = colour;
     }
 
     @Override
-    public int CheckMove(Piece piece, int x_direction, int y_direction, int potential_moves, Square[][] board) 
+    public int CheckMove(Piece piece, int x_direction, int y_direction, Square finalPosition, Square[][] board) 
     {
         int check = 1;
         
-        //For loops are used to iterate between the original position of the bishop and its desired location.
-        if (piece.direction == Direction.NORTHEAST)
+        if (board[finalPosition.getX_location()][finalPosition.getY_location()].isValidLocation() == false)
         {
-            for (int i = 1; i < potential_moves; i++)
-            {
-                if (board[x_direction + i][y_direction + i].getPiece() != null && board[x_direction + i][y_direction + i].getPiece().colour == piece.colour)
-                {
-                    System.out.println("The bishop cannot move here");
-                    check = 0;
-                    break;
-                }
-            }
+            check = 1;
         }
         
-        if (piece.direction == Direction.SOUTHEAST)
-        {
-            for (int i = 1; i < potential_moves; i++)
-            {
-                if (board[x_direction + i][y_direction - i].getPiece() != null && board[x_direction + i][y_direction - i].getPiece().colour == piece.colour)
-                {
-                    System.out.println("The bishop cannot move here");
-                    check = 0;
-                    break;
-                }
-            }
-        }
-        
-        if (piece.direction == Direction.SOUTHWEST)
-        {
-            for (int i = 1; i < potential_moves; i++)
-            {
-                if (board[x_direction - i][y_direction - i].getPiece() != null && board[x_direction - i][y_direction - i].getPiece().colour == piece.colour)
-                {
-                    System.out.println("The bishop cannot move here");
-                    check = 0;
-                    break;
-                }
-            }
-        }
-        
-        if (piece.direction == Direction.NORTHWEST)
-        {
-            for (int i = 1; i < potential_moves; i++)
-            {
-                if (board[x_direction - i][y_direction + i].getPiece() != null && board[x_direction - i][y_direction + i].getPiece().colour == piece.colour)
-                {
-                    System.out.println("The bishop cannot move here");
-                    check = 0;
-                    break;
-                }
-            }
-        }
         
         return check;
     }
 
     @Override
-    public void MakeMove(Piece piece, int x_direction, int y_direction, int potential_moves, Square[][] board) 
+    public void MakeMove(Piece piece, int x_direction, int y_direction, Square finalPosition, Square[][] board) 
     {
-       if (piece.direction == direction.NORTHEAST)
-       {
-           board[x_direction + potential_moves][y_direction + potential_moves].setPiece(piece);
-       }
-       else if (piece.direction == direction.SOUTHEAST)
-       {
-           board[x_direction + potential_moves][y_direction - potential_moves].setPiece(piece);
-       }
-       else if (piece.direction == direction.SOUTHWEST)
-       {
-           board[x_direction - potential_moves][y_direction - potential_moves].setPiece(piece);
-       }
-       else if (piece.direction == direction.NORTHWEST)
-       {
-           board[x_direction - potential_moves][y_direction + potential_moves].setPiece(piece);
-       }
-       
+       board[finalPosition.getX_location()][finalPosition.getY_location()].setPiece(piece);
        board[x_direction][y_direction].setPiece(null);
     }
      
