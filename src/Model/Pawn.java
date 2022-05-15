@@ -51,7 +51,7 @@ public class Pawn extends Piece{
         }
         else if (piece.colour == PlayerColour.BLACK)
         {
-             board[finalPosition.getX_location()][finalPosition.getY_location()].setPiece(piece);
+            board[finalPosition.getX_location()][finalPosition.getY_location()].setPiece(piece);
             board[x_direction][y_direction].setPiece(null); 
         }
         
