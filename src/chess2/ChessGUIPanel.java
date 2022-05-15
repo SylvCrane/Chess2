@@ -16,12 +16,11 @@ import javax.swing.JPanel;
 public class ChessGUIPanel extends JPanel
 {
     public Image image;
-    public JPanel panel;
     
-    public ChessGUIPanel(Image image, JPanel panel)
+    
+    public ChessGUIPanel(Image image)
     {
         this.image = image;
-        this.panel = panel;
     }
     
     public void setUpGUIBoard(ChessGUIPanel[][] GUIBoard, Square[][] board)
@@ -31,7 +30,7 @@ public class ChessGUIPanel extends JPanel
         {
             for (int xIndex = 0; xIndex < 8; xIndex++)
             {
-                GUIBoard[xIndex][yIndex] = new ChessGUIPanel(null, new JPanel());
+                GUIBoard[xIndex][yIndex] = new ChessGUIPanel(null);
                 
                 if (board[xIndex][yIndex].getPiece() != null)
                 {
