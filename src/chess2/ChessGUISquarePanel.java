@@ -4,6 +4,7 @@
  */
 package chess2;
 
+import Model.Square;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
