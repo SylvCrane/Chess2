@@ -13,13 +13,17 @@ public class Square {
     private Piece piece;
     private int x_location;
     private int y_location;
+    private boolean validLocation;
  
     public Square(Piece piece, int x_location, int y_location)
     {
         this.x_location = x_location;
         this.y_location = y_location;
         this.piece = piece;
+        this.validLocation = false;
     }
+    
+    
 
     public Piece getPiece() {
         return piece;
@@ -75,5 +79,19 @@ public class Square {
         
         
         
+    }
+
+    /**
+     * @return the validLocation
+     */
+    public boolean isValidLocation() {
+        return validLocation;
+    }
+
+    /**
+     * @param validLocation the validLocation to set
+     */
+    public void setValidLocation(boolean validLocation) {
+        this.validLocation = validLocation;
     }
 }
