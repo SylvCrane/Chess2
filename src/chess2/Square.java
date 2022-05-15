@@ -24,7 +24,7 @@ public class Square {
     }
     
     
-
+    
     public Piece getPiece() {
         return piece;
     }
@@ -53,9 +53,17 @@ public class Square {
         this.y_location = y_location;
     }
     
+    public boolean isValidLocation() {
+        return validLocation;
+    }
+
+    public void setValidLocation(boolean validLocation) {
+        this.validLocation = validLocation;
+    }
+    
     /**
      * This sets up the board that will be used for the duration of the program. Specifically, it reads from the pieces text file and initializes each piece, 
-     * which includes its name, colour and direction. Their location is also set.
+     * which includes its name, color and direction. Their location is also set.
      * 
      * @param board
      * @param x_direction
@@ -73,25 +81,6 @@ public class Square {
             {
                 board[xIndex][yIndex] = new Square(null, xIndex, yIndex);
             }
-        }
-        
-        
-        
-        
-        
-    }
-
-    /**
-     * @return the validLocation
-     */
-    public boolean isValidLocation() {
-        return validLocation;
-    }
-
-    /**
-     * @param validLocation the validLocation to set
-     */
-    public void setValidLocation(boolean validLocation) {
-        this.validLocation = validLocation;
-    }
+        } 
+    } 
 }
