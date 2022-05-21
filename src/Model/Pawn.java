@@ -8,6 +8,7 @@ public class Pawn extends Piece{
         this.pieceName = pieceName;
         this.potential_moves = potential_moves;
         this.colour = colour;
+        this.direction = Direction.STILL;
     }
     /*
     The following method will check if the move can be made. Mainly, it is checking if there is another piece in the position

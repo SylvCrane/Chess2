@@ -16,6 +16,7 @@ public class Knight extends Piece{
         this.pieceName = pieceName;
         this.potential_moves = potential_moves;
         this.colour = colour;
+        this.direction = Direction.STILL;
     }
     
     @Override
