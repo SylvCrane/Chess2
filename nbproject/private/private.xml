@@ -2,6 +2,12 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+        <group/>
+=======
+>>>>>>> Stashed changes
         <group>
 <<<<<<< Updated upstream
             <file>file:/C:/Users/navjo/OneDrive/Documents/NetBeansProjects/Chess2/src/chess2/Square.java</file>
@@ -19,5 +25,9 @@
             <file>file:/C:/Users/navjo/OneDrive/Documents/NetBeansProjects/Chess2/src/Model/Player.java</file>
 >>>>>>> Stashed changes
         </group>
+<<<<<<< Updated upstream
+=======
+>>>>>>> Development
+>>>>>>> Stashed changes
     </open-files>
 </project-private>
