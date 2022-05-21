@@ -17,15 +17,16 @@ public class PlayerInput {
     private int potential_moves;
     private int x_direction;
     private int y_direction;
+    private Square pieceToMove;
     
-    public PlayerInput(Player player, int potential_moves, int x_direction, int y_direction) {
+    public PlayerInput(Player player, int potential_moves, int x_direction, int y_direction, Square pieceToMove) {
         this.player = player;
         this.potential_moves = potential_moves;
         this.x_direction = x_direction;
         this.y_direction = y_direction;
+        this.pieceToMove = pieceToMove;
     }
    
-    
     public boolean playerQuit (String input)
     {
         boolean playerQuits = false;
@@ -80,13 +81,14 @@ public class PlayerInput {
         return directionString;
     }
     
-    public boolean appropriatePiece (Square[][] board)
+    public boolean appropriatePiece (Square[][] board, Square pieceToMove)
     {
+        this.setPieceToMove(pieceToMove);
         boolean appropriateToMove = false;
         
-        if (board[this.getX_direction()][this.getY_direction()].getPiece() != null)
+        if (board[this.getPieceToMove().getX_location()][this.getPieceToMove().getY_location()].getPiece() != null)
         {
-            if (board[this.getX_direction()][this.getY_direction()].getPiece().colour == this.getPlayer().getColour())
+            if (board[this.getPieceToMove().getX_location()][this.getPieceToMove().getY_location()].getPiece().colour == this.getPlayer().getColour())
             {
                 appropriateToMove = true;
             }
@@ -102,68 +104,27 @@ public class PlayerInput {
      * @param directionInput
      * @return 
      */
-    public boolean directionChange (Square[][] board, int directionInput)
+    public boolean appropriateDestination (Square[][] board)
     {
-        boolean directionOkay = false;
+        boolean destinationOkay = false;
         
-        if (board[this.getX_direction()][this.getY_direction()].getPiece().getClass().equals(Pawn.class))
+        if (board[this.getPieceToMove().getX_location()][this.getPieceToMove().getY_location()].getPiece().getClass().equals(Pawn.class))
         {
-            if (directionInput == 2 || directionInput == 3)
+            if (this.getPieceToMove().getPiece().getColour() == PlayerColour.WHITE)
             {
-               KillandTake opposingCheck = new KillandTake(board[this.getX_direction()][this.getY_direction()].getPiece(), this.getX_direction(), this.getY_direction(), 1);
-               
-               //As stated in this method's comment declaration, it needs to check at this point in order to verify if the pawn can move diagonally or not.
-               if (opposingCheck.CheckForOpposingPawn(board[this.getX_direction()][this.getY_direction()].getPiece(), this.getX_direction(), this.getY_direction(), 1, board, directionInput))
-               {
-                   System.out.println("You can move this piece diagonally");
-                   directionOkay = true;
-                   
-                   switch (directionInput)
-                   {
-                       case 2:
-                           if (board[this.getX_direction()][this.getY_direction()].getPiece().colour == PlayerColour.WHITE)
-                           {
-                               board[this.getX_direction()][this.getY_direction()].getPiece().direction = Direction.NORTHWEST;
-                           }
-                           else if (board[this.getX_direction()][this.getY_direction()].getPiece().colour == PlayerColour.BLACK)
-                           {
-                               board[this.getX_direction()][this.getY_direction()].getPiece().direction = Direction.SOUTHWEST;
-                           }
-                           break;
-                       case 3:
-                           if (board[this.getX_direction()][this.getY_direction()].getPiece().colour == PlayerColour.WHITE)
-                           {
-                               board[this.getX_direction()][this.getY_direction()].getPiece().direction = Direction.NORTHEAST;
-                           }
-                           else if (board[this.getX_direction()][this.getY_direction()].getPiece().colour == PlayerColour.BLACK)
-                           {
-                               board[this.getX_direction()][this.getY_direction()].getPiece().direction = Direction.SOUTHEAST;
-                           }
-                           break;
-                   }
-               }
-               else
-               {
-                   System.out.println("Sorry, you cannot move the pawn this way");
-               }
+                if ((this.getPieceToMove().getX_location() - 1) == (this.getX_direction()) && (this.getPieceToMove().getY_location() + 1) == this.getY_direction())
+                {
+                    
+                }
+                else if ((this.getPieceToMove().getX_location() + 1) == (this.getX_direction()) && (this.getPieceToMove().getY_location() + 1) == this.getY_direction())
+                {
+                    
+                }
+                else if ((this.getPieceToMove().getY_location() + 1) == this.getY_direction())
             }
-            else if (directionInput == 1)
+            else if (this.getPieceToMove().getPiece().getColour() == PlayerColour.BLACK)
             {
-                System.out.println("You can move the piece this way");
-                directionOkay = true;
                 
-                if (board[this.getX_direction()][this.getY_direction()].getPiece().colour == PlayerColour.WHITE)
-                {
-                    board[this.getX_direction()][this.getY_direction()].getPiece().direction = Direction.NORTH;
-                }
-                else if (board[this.getX_direction()][this.getY_direction()].getPiece().colour == PlayerColour.BLACK)
-                {
-                    board[this.getX_direction()][this.getY_direction()].getPiece().direction = Direction.SOUTH;
-                }
-            }
-            else
-            {
-                System.out.println("Please enter a valid input for the direction.");
             }
         }
         else if (board[this.getX_direction()][this.getY_direction()].getPiece().getClass().equals(Rook.class))
@@ -553,31 +514,6 @@ public class PlayerInput {
         return movesChecked;
     }
     
-    /**
-     * Checks if the square location selected by the user is out of bounds. If this is the case, it returns false. It is in a try() function as once it catched
-     * the out of bounds exception, it returns the catch code.
-     * 
-     * @param board
-     * @return 
-     */
-    public boolean squareOutOfBounds(Square[][] board)
-    {
-        boolean validSquare = false;
-        
-        try{
-            if (board[this.getX_direction()][this.getY_direction()] != null)
-            {
-                System.out.println("There is a square here");
-                validSquare = true;
-            }
-        }
-        catch (Exception e)
-        {
-            System.out.println("This is not a valid square");
-        }
-        
-        return validSquare;
-    }
     
     /**
      * Checks if the piece selected by the player at this point is the same colour as the player's colour.
@@ -670,6 +606,20 @@ public class PlayerInput {
      */
     public void setY_direction(int y_direction) {
         this.y_direction = y_direction;
+    }
+
+    /**
+     * @return the pieceToMove
+     */
+    public Square getPieceToMove() {
+        return pieceToMove;
+    }
+
+    /**
+     * @param pieceToMove the pieceToMove to set
+     */
+    public void setPieceToMove(Square pieceToMove) {
+        this.pieceToMove = pieceToMove;
     }
     
     
