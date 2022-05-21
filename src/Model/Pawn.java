@@ -16,18 +16,18 @@ public class Pawn extends Piece{
     cannot attack from the front).
     */
     @Override
-    public int CheckMove(Piece piece, int x_direction, int y_direction, Square finalPosition, Square[][] board)
+    public int CheckMove(int x_direction, int y_direction, Square pieceToMove, Square[][] board)
     {
         int check = 0;
         
-        if (piece.colour == PlayerColour.WHITE)
+        if (pieceToMove.getPiece().colour == PlayerColour.WHITE)
         {
-            if (board[finalPosition.getX_location()][finalPosition.getY_location()].isValidLocation() == false)
+            if (board[x_direction][y_direction].getPiece() == null)
             {
-                check = 1;
+                check = 0;
             }
         }
-        else if (piece.colour == PlayerColour.BLACK)
+        else if (pieceToMove.getPiece().colour == PlayerColour.BLACK)
         {
             if (board[finalPosition.getX_location()][finalPosition.getY_location()].isValidLocation() == false)
             {
@@ -40,7 +40,7 @@ public class Pawn extends Piece{
     
     
     @Override
-    public void MakeMove(Piece piece, int x_direction, int y_direction, Square finalPosition, Square[][] board)
+    public void MakeMove(int x_direction, int y_direction, Square pieceToMove, Square[][] board)
     {
         if (piece.colour == PlayerColour.WHITE)
         {

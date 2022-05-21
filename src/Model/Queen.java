@@ -20,7 +20,7 @@ public class Queen extends Piece{
     }
 
     @Override
-    public int CheckMove(Piece piece, int x_direction, int y_direction, Square finalPosition, Square[][] board) 
+    public int CheckMove(int x_direction, int y_direction, Square pieceToMove, Square[][] board) 
     {
         int check = 1;
         
@@ -33,7 +33,7 @@ public class Queen extends Piece{
     }
 
     @Override
-    public void MakeMove(Piece piece, int x_direction, int y_direction, Square finalPosition, Square[][] board) 
+    public void MakeMove(int x_direction, int y_direction, Square pieceToMove, Square[][] board) 
     {
         
         board[finalPosition.getX_location()][finalPosition.getY_location()].setPiece(piece);
