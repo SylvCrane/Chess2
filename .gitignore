@@ -1,7 +1,15 @@
 /build/
 /dist/
 nbproject/private/private.xml
+<<<<<<< HEAD
 nbproject/private/private.xml
 *.xml
+=======
+<<<<<<< Updated upstream
+=======
+nbproject/private/private.xml
 *.xml
 nbproject/private/private.xml
+>>>>>>> Stashed changes
+nbproject/private/private.xml
+>>>>>>> Development
