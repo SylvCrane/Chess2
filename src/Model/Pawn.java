@@ -24,12 +24,12 @@ public class Pawn extends Piece{
         {
             if (board[x_direction][y_direction].getPiece() == null)
             {
-                check = 0;
+                check = 1;
             }
         }
         else if (pieceToMove.getPiece().colour == PlayerColour.BLACK)
         {
-            if (board[finalPosition.getX_location()][finalPosition.getY_location()].isValidLocation() == false)
+            if (board[x_direction][y_direction].getPiece() == null)
             {
                 check = 1;
             }
@@ -42,38 +42,38 @@ public class Pawn extends Piece{
     @Override
     public void MakeMove(int x_direction, int y_direction, Square pieceToMove, Square[][] board)
     {
-        if (piece.colour == PlayerColour.WHITE)
+        if (pieceToMove.getPiece().colour == PlayerColour.WHITE)
         {
-            board[finalPosition.getX_location()][finalPosition.getY_location()].setPiece(piece);
-            board[x_direction][y_direction].setPiece(null); 
+            board[x_direction][y_direction].setPiece(pieceToMove.getPiece());
+            board[pieceToMove.getX_location()][pieceToMove.getY_location()].setPiece(null); 
             
             //It is important that the original position is set to null as, otherwise, the board would be filled with duplicate pieces.
               
         }
-        else if (piece.colour == PlayerColour.BLACK)
+        else if (pieceToMove.getPiece().colour == PlayerColour.BLACK)
         {
-            board[finalPosition.getX_location()][finalPosition.getY_location()].setPiece(piece);
-            board[x_direction][y_direction].setPiece(null); 
+            board[x_direction][y_direction].setPiece(pieceToMove.getPiece());
+            board[pieceToMove.getX_location()][pieceToMove.getY_location()].setPiece(null);
         }
         
-        if (piece.potential_moves == 2)
+        if (pieceToMove.getPiece().potential_moves == 2)
         {
-            piece.potential_moves -= 1;
+            pieceToMove.getPiece().potential_moves -= 1;
         }
         
         //This is in the case that a pawn reaches the other end of the board. As is traditional in chess, it becomes a queen.
-        if (piece.colour == PlayerColour.WHITE)
+        if (pieceToMove.getPiece().colour == PlayerColour.WHITE)
         {
-            if ((y_direction + potential_moves) == 7)
+            if ((y_direction) == 7)
             {
-                board[x_direction][y_direction + potential_moves].setPiece(new Queen("whiteQueen", 7, PlayerColour.WHITE));
+                board[x_direction][y_direction].setPiece(new Queen("whiteQueen", 7, PlayerColour.WHITE));
             }
         }
-        else if (piece.colour == PlayerColour.BLACK)
+        else if (pieceToMove.getPiece().colour == PlayerColour.BLACK)
         {
-            if ((y_direction - potential_moves) == 0)
+            if ((y_direction) == 0)
             {
-                board[x_direction][y_direction - potential_moves].setPiece(new Queen("blackQueen", 7, PlayerColour.BLACK));
+                board[x_direction][y_direction].setPiece(new Queen("blackQueen", 7, PlayerColour.BLACK));
             }
         }
        
