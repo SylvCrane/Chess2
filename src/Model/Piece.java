@@ -16,6 +16,7 @@ public abstract class Piece{
     /**
      * This is the direction of the piece, denoted by the enumerated type. 
      */
+    public Direction direction;
     
     public PlayerColour colour;
     
