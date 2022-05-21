@@ -25,48 +25,7 @@ public class PlayerInput {
         this.y_direction = y_direction;
     }
    
-    /**
-     * This checks if the xInput of the piece is appropriate (An integer, and not the quit input). It is separate to make the main more legible.
-     * 
-     * @param xInput: The xInput, in the form of a string as that is what the user input would be.
-     * @return 
-     */
-    public boolean xInputCheck (String xInput)
-    {
-        boolean xInputCorrect = false;
-        
-        try
-        {
-            int xInputInt = Integer.parseInt(xInput);
-            xInputCorrect = true; 
-            
-        }
-        catch (NumberFormatException e)
-        {
-            System.out.println("This is not a valid input, please input a number.");
-        }
-        
-        return xInputCorrect;
-    }
-   
-    /**
-     * Converts a string input into an integer
-     * 
-     * @param input
-     * @return 
-     */
-    public int intConvert (String input)
-    {
-        int inputInt = Integer.parseInt(input);
-        return inputInt;
-    }
     
-    /**
-     * Boolean method that checks if the input is the quit input, being 'x'. This is important to allow the user to quit the program at any point.
-     * 
-     * @param input
-     * @return 
-     */
     public boolean playerQuit (String input)
     {
         boolean playerQuits = false;
@@ -77,90 +36,48 @@ public class PlayerInput {
         }
         return playerQuits;
     }
-   /**
-    * Same as the xInput, but for y-coordinates. It is separated to make main more legible.
-    * 
-    * @param yInput
-    * @return 
-    */
-    public boolean yInputCheck (String yInput)
-    {
-        boolean yInputCorrect = false;
-        
-        try
-        {
-            int yInputInt = Integer.parseInt(yInput);
-            yInputCorrect = true; 
-           
-        }
-        catch (NumberFormatException e)
-        {
-            System.out.println("This is not a valid input, please input a number.");
-        }
-        
-        return yInputCorrect;
-    }
-    
-    /**
-     * This checks if the direction the player wants to input is appropriate(An integer that is not the quit input).
-     * @param directionInput
-     * @return 
-     */
-    public boolean directionInputCheck(String directionInput)
-    {
-        boolean inputCheck = false;
-        
-        try
-        {
-            int InputInt = Integer.parseInt(directionInput);
-            inputCheck = true; 
-            
-        }
-        catch (NumberFormatException e)
-        {
-            System.out.println("This is not a valid input, please input a number.");
-        }
-        
-        return inputCheck;
-    }
-    
+   
     /**
      * This prints the direction rules fo the piece selected by the user through their x and y locations.
      * 
      * @param board: The two-dimensional square array that represents the board.
      */
-    public void directionPrint (Square[][] board)
+    public String directionPrint (Square[][] board)
     {
+        String directionString = "";
+        
         if (board[this.getX_direction()][this.getY_direction()].getPiece().getClass().equals(Pawn.class))
         {
-            System.out.println("You can move this piece forward (1), and diagonally to the left (2) or right (3). It can only move diagonally if there is an enemy piece in this location..");
-            System.out.println("To move this piece in any of these directions, input a number from 1 -> 3, each number corresponding to the directions previously mentioned. ");
+            directionString = "You can move this piece forward\nand diagonally to the left or right.\nIt can only move diagonally if there\nis an enemy piece in this location.";
+            
         }
         else if (board[this.getX_direction()][this.getY_direction()].getPiece().getClass().equals(Rook.class))
         {
-            System.out.println("You can move this piece) \nnorth (1) \neast (2) \nsouth (3) \nwest (4).");
-            System.out.println("To move this piece in any of these directions, input a number from 1 -> 4, each number corresponding to the directions previously mentioned.");
+            directionString = "You can move this piece) \nnorth \neast \nsouth \nwest.";
+           
         }
         else if (board[this.getX_direction()][this.getY_direction()].getPiece().getClass().equals(Knight.class))
         {
-            System.out.println("This piece moves in an L-Shape in the following directions: \nNorth North East (1)\nNorth East East (2)\nSouth East East (3)\nSouth South East(4)\nSouth South West(5)\nSouth West West(6)\nNorth West West(7)\nNorth North West(8)");
-            System.out.println("To move this piece in any of these directions, input a number from 1->8, each number corresponding to the directions previously mentioned.");
+            directionString = "This piece moves in an L-Shape in the following directions: \nNorth North East \nNorth East East \nSouth East East \nSouth South East\nSouth South West\nSouth West West\nNorth West West\nNorth North West";
+           
         }
         else if (board[this.getX_direction()][this.getY_direction()].getPiece().getClass().equals(Bishop.class))
         {
-            System.out.println("You can move this piece in the following directions\nNorth East (1)\nSouth East (2)\nSouth West (3)\nNorth West (4)");
-            System.out.println("To move this piece in any of these directions, input a number from 1 -> 4, each number corresponding to the directions previously mentioned.");  
+            directionString = "You can move this piece in the following directions\nNorth East \nSouth East \nSouth West \nNorth West ";
+            
         }
         else if (board[this.getX_direction()][this.getY_direction()].getPiece().getClass().equals(Queen.class))
         {
-            System.out.println("This piece moves in the following directions: \nNorth (1)\nNorth East (2)\nEast (3)\nSouth East (4)\nSouth (5)\nSouth West (6)\nWest (7)\nNorth West (8)");
-            System.out.println("To move this piece in any of these directions, input a number from 1 -> 8, each nubmer corresponding to the directions previously mentioned.");
+            directionString = "This piece moves in the following directions: \nNorth \nNorth East \nEast \nSouth East \nSouth \nSouth West \nWest \nNorth West ";
+            
         }
         else if (board[this.getX_direction()][this.getY_direction()].getPiece().getClass().equals(King.class))
         {
-            System.out.println("This piece moves one space in the following directions: \nNorth (1)\nNorth East (2)\nEast (3)\nSouth East (4)\nSouth (5)\nSouth West (6)\nWest (7)\nNorth West (8)");
-            System.out.println("To move this piece in any of these directions, input a number from 1 -> 8, each nubmer corresponding to the directions previously mentioned.");
+            directionString = "This piece moves one space in the following directions: \nNorth \nNorth East \nEast \nSouth East \nSouth \nSouth West \nWest \nNorth West ";
+            
         }
+        
+        return directionString;
     }
     
     /**
