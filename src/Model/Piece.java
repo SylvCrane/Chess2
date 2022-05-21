@@ -39,7 +39,7 @@ public abstract class Piece{
      * @param board: The game board, a two-dimensional array of the Square class.
      * @return: an integer which states whether the move can be completed. If 1, then yes. If 0, then no.
      */
-    public abstract int CheckMove(Piece piece, int x_direction, int y_direction, Square finalPosition, Square[][] board);
+    public abstract int CheckMove(int x_direction, int y_direction, Square pieceToMove, Square[][] board);
     
     /**
      * This abstract method is used to move the piece after all other checks have been completed, excluding check.
@@ -51,7 +51,7 @@ public abstract class Piece{
      * @param board: The game board, a two-dimensional array of the Square class.
      * 
      */
-    public abstract void MakeMove(Piece piece, int x_direction, int y_direction, Square finalPosition, Square[][] board);
+    public abstract void MakeMove(int x_direction, int y_direction, Square pieceToMove, Square[][] board);
 
     /**
      * @return the pieceName
