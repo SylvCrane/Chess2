@@ -24,11 +24,46 @@ public class Bishop extends Piece{
     {
         int check = 1;
         
-        if (board[finalPosition.getX_location()][finalPosition.getY_location()].isValidLocation() == false)
+        if (pieceToMove.getPiece().direction == Direction.NORTHEAST)
         {
-            check = 1;
+            for (int i = 0; i < x_direction; i++)
+            {
+                if (board[pieceToMove.getX_location() + i][pieceToMove.getY_location() + i].getPiece() != null)
+                {
+                    check = 0;
+                }
+            }
         }
-        
+        else if (pieceToMove.getPiece().direction == Direction.SOUTHEAST)
+        {
+            for (int i = 0; i < x_direction; i++)
+            {
+                if (board[pieceToMove.getX_location() + i][pieceToMove.getY_location() - i].getPiece() != null)
+                {
+                    check = 0;
+                }
+            }
+        }
+        else if (pieceToMove.getPiece().direction == Direction.SOUTHWEST)
+        {
+            for (int i = 0; i < (8 - x_direction); i++)
+            {
+                if (board[pieceToMove.getX_location() - i][pieceToMove.getY_location() - i].getPiece() != null)
+                {
+                    check = 0;
+                }
+            }
+        }
+        else if (pieceToMove.getPiece().direction == Direction.NORTHWEST)
+        {
+            for (int i = 0; i < (8 - x_direction); i++)
+            {
+                if (board[pieceToMove.getX_location() - i][pieceToMove.getY_location() + i].getPiece() != null)
+                {
+                    check = 0;
+                }
+            }
+        }
         
         return check;
     }
@@ -36,8 +71,8 @@ public class Bishop extends Piece{
     @Override
     public void MakeMove(int x_direction, int y_direction, Square pieceToMove, Square[][] board) 
     {
-       board[finalPosition.getX_location()][finalPosition.getY_location()].setPiece(piece);
-       board[x_direction][y_direction].setPiece(null);
+        board[x_direction][y_direction].setPiece(pieceToMove.getPiece());
+        board[pieceToMove.getX_location()][pieceToMove.getY_location()].setPiece(null);
     }
      
 }

@@ -28,11 +28,63 @@ public class Knight extends Piece{
          * Because of the knight's special moving situation, wherein it moves in an L-Shape straight to its
          * destination, it only needs to check its destination and none of the spots between.
          */
-        
-        if (board[finalPosition.getX_location()][finalPosition.getY_location()].isValidLocation() == false)
+        if (pieceToMove.getPiece().direction == Direction.NORTHNORTHEAST)
         {
-            check = 1;
+            if (board[x_direction][y_direction].getPiece() != null && board[x_direction][y_direction].getPiece().colour == pieceToMove.getPiece().colour)
+            {
+                check = 0;
+            }
         }
+        else if (pieceToMove.getPiece().direction == Direction.NORTHEASTEAST)
+        {
+            if (board[x_direction][y_direction].getPiece() != null && board[x_direction][y_direction].getPiece().colour == pieceToMove.getPiece().colour)
+            {
+                check = 0;
+            }
+        }
+        else if (pieceToMove.getPiece().direction == Direction.SOUTHEASTEAST)
+        {
+            if (board[x_direction][y_direction].getPiece() != null && board[x_direction][y_direction].getPiece().colour == pieceToMove.getPiece().colour)
+            {
+                check = 0;
+            }
+        }
+        else if (pieceToMove.getPiece().direction == Direction.SOUTHSOUTHEAST)
+        {
+            if (board[x_direction][y_direction].getPiece() != null && board[x_direction][y_direction].getPiece().colour == pieceToMove.getPiece().colour)
+            {
+                check = 0;
+            }
+        }
+        else if (pieceToMove.getPiece().direction == Direction.SOUTHSOUTHWEST)
+        {
+            if (board[x_direction][y_direction].getPiece() != null && board[x_direction][y_direction].getPiece().colour == pieceToMove.getPiece().colour)
+            {
+                check = 0;
+            }
+        }
+        else if (pieceToMove.getPiece().direction == Direction.SOUTHWESTWEST)
+        {
+            if (board[x_direction][y_direction].getPiece() != null && board[x_direction][y_direction].getPiece().colour == pieceToMove.getPiece().colour)
+            {
+                check = 0;
+            }
+        }
+        else if (pieceToMove.getPiece().direction == Direction.NORTHWESTWEST)
+        {
+            if (board[x_direction][y_direction].getPiece() != null && board[x_direction][y_direction].getPiece().colour == pieceToMove.getPiece().colour)
+            {
+                check = 0;
+            }
+        }
+        else if (pieceToMove.getPiece().direction == Direction.NORTHNORTHWEST)
+        {
+            if (board[x_direction][y_direction].getPiece() != null && board[x_direction][y_direction].getPiece().colour == pieceToMove.getPiece().colour)
+            {
+                check = 0;
+            }
+        }
+        
        
        return check;
     }
@@ -40,9 +92,8 @@ public class Knight extends Piece{
     @Override
     public void MakeMove(int x_direction, int y_direction, Square pieceToMove, Square[][] board) 
     { 
-        board[finalPosition.getX_location()][finalPosition.getY_location()].setPiece(piece);
-        
-        board[x_direction][y_direction].setPiece(null);
+        board[x_direction][y_direction].setPiece(pieceToMove.getPiece());
+        board[pieceToMove.getX_location()][pieceToMove.getY_location()].setPiece(null);
         
     }
      

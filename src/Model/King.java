@@ -24,13 +24,78 @@ public class King extends Piece{
     {
         int check = 1;
         
-        if (board[finalPosition.getX_location()][finalPosition.getY_location()].isValidLocation() == false)
+        if (pieceToMove.getPiece().direction == Direction.NORTH)
         {
-            check = 1;
+            
+            if (board[pieceToMove.getX_location()][pieceToMove.getY_location() + 1].getPiece() != null)
+            {
+                check = 0;
+            }
+            
         }
-       
-       
-       
+        else if (pieceToMove.getPiece().direction == Direction.EAST)
+        {
+            
+            if (board[pieceToMove.getX_location() + 1][pieceToMove.getY_location()].getPiece() != null)
+            {
+                check = 0;
+            }
+            
+        }
+        else if (pieceToMove.getPiece().direction == Direction.SOUTH)
+        {
+            
+            if (board[pieceToMove.getX_location()][pieceToMove.getY_location() - 1].getPiece() != null)
+            {
+                check = 0;
+            }
+            
+        }
+        else if (pieceToMove.getPiece().direction == Direction.WEST)
+        {
+            
+            if (board[pieceToMove.getX_location() - 1][pieceToMove.getY_location()].getPiece() != null)
+            {
+                check = 0;
+            } 
+            
+        }
+        else if (pieceToMove.getPiece().direction == Direction.NORTHEAST)
+        {
+            
+            if (board[pieceToMove.getX_location() + 1][pieceToMove.getY_location() + 1].getPiece() != null)
+            {
+                check = 0;
+            }
+            
+        }
+        else if (pieceToMove.getPiece().direction == Direction.SOUTHEAST)
+        {
+            
+            if (board[pieceToMove.getX_location() + 1][pieceToMove.getY_location() - 1].getPiece() != null)
+            {
+                check = 0;
+            }
+
+        }
+        else if (pieceToMove.getPiece().direction == Direction.SOUTHWEST)
+        {
+            
+            if (board[pieceToMove.getX_location() - 1][pieceToMove.getY_location() - 1].getPiece() != null)
+            {
+                check = 0;
+            }
+            
+        }
+        else if (pieceToMove.getPiece().direction == Direction.NORTHWEST)
+        {
+            
+            if (board[pieceToMove.getX_location() - 1][pieceToMove.getY_location() + 1].getPiece() != null)
+            {
+                check = 0;
+            }
+            
+        }
        
        return check;
     }
@@ -38,8 +103,8 @@ public class King extends Piece{
     @Override
     public void MakeMove(int x_direction, int y_direction, Square pieceToMove, Square[][] board) 
     {
-        board[finalPosition.getX_location()][finalPosition.getY_location()].setPiece(piece);
-        board[x_direction][y_direction].setPiece(null);
+        board[x_direction][y_direction].setPiece(pieceToMove.getPiece());
+        board[pieceToMove.getX_location()][pieceToMove.getY_location()].setPiece(null);
        
     }
      
