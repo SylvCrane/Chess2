@@ -24,42 +24,6 @@ public class PlayerInput {
         this.x_direction = x_direction;
         this.y_direction = y_direction;
     }
-   
-    /**
-     * This checks if the xInput of the piece is appropriate (An integer, and not the quit input). It is separate to make the main more legible.
-     * 
-     * @param xInput: The xInput, in the form of a string as that is what the user input would be.
-     * @return 
-     */
-    public boolean xInputCheck (String xInput)
-    {
-        boolean xInputCorrect = false;
-        
-        try
-        {
-            int xInputInt = Integer.parseInt(xInput);
-            xInputCorrect = true; 
-            
-        }
-        catch (NumberFormatException e)
-        {
-            System.out.println("This is not a valid input, please input a number.");
-        }
-        
-        return xInputCorrect;
-    }
-   
-    /**
-     * Converts a string input into an integer
-     * 
-     * @param input
-     * @return 
-     */
-    public int intConvert (String input)
-    {
-        int inputInt = Integer.parseInt(input);
-        return inputInt;
-    }
     
     /**
      * Boolean method that checks if the input is the quit input, being 'x'. This is important to allow the user to quit the program at any point.
@@ -76,52 +40,6 @@ public class PlayerInput {
             playerQuits = true;
         }
         return playerQuits;
-    }
-   /**
-    * Same as the xInput, but for y-coordinates. It is separated to make main more legible.
-    * 
-    * @param yInput
-    * @return 
-    */
-    public boolean yInputCheck (String yInput)
-    {
-        boolean yInputCorrect = false;
-        
-        try
-        {
-            int yInputInt = Integer.parseInt(yInput);
-            yInputCorrect = true; 
-           
-        }
-        catch (NumberFormatException e)
-        {
-            System.out.println("This is not a valid input, please input a number.");
-        }
-        
-        return yInputCorrect;
-    }
-    
-    /**
-     * This checks if the direction the player wants to input is appropriate(An integer that is not the quit input).
-     * @param directionInput
-     * @return 
-     */
-    public boolean directionInputCheck(String directionInput)
-    {
-        boolean inputCheck = false;
-        
-        try
-        {
-            int InputInt = Integer.parseInt(directionInput);
-            inputCheck = true; 
-            
-        }
-        catch (NumberFormatException e)
-        {
-            System.out.println("This is not a valid input, please input a number.");
-        }
-        
-        return inputCheck;
     }
     
     /**
