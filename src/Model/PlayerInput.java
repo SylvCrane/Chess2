@@ -80,6 +80,21 @@ public class PlayerInput {
         return directionString;
     }
     
+    public boolean appropriatePiece (Square[][] board)
+    {
+        boolean appropriateToMove = false;
+        
+        if (board[this.getX_direction()][this.getY_direction()].getPiece() != null)
+        {
+            if (board[this.getX_direction()][this.getY_direction()].getPiece().colour == this.getPlayer().getColour())
+            {
+                appropriateToMove = true;
+            }
+        }
+        
+        return appropriateToMove;
+    }
+    
     /**
      * This changed the direction of the piece based on the number the user inputted. If it is appropriate, it returns a positive boolean. If not, it will return false.
      * 
