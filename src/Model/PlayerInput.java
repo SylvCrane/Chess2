@@ -467,8 +467,6 @@ public class PlayerInput {
         this.player = player;
     }
 
-   
-
     /**
      * @return the potential_moves
      */
