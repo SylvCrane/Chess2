@@ -399,6 +399,7 @@ public class PlayerInput {
                 {
                     deadPieceStore.setX_location(this.getPieceToMove().getX_location() - 1);
                     deadPieceStore.setY_location(this.getPieceToMove().getX_location() + 1);
+                    deadPieceStore.setPiece(board[this.getX_direction()][this.getY_direction()].getPiece());
                     board[this.getX_direction()][this.getY_direction()].setPiece(this.getPieceToMove().getPiece());
                     opposingFound = true;
                 }
@@ -406,6 +407,7 @@ public class PlayerInput {
                 {
                     deadPieceStore.setX_location(this.getPieceToMove().getX_location() + 1);
                     deadPieceStore.setY_location(this.getPieceToMove().getX_location() + 1);
+                    deadPieceStore.setPiece(board[this.getX_direction()][this.getY_direction()].getPiece());
                     board[this.getX_direction()][this.getY_direction()].setPiece(this.getPieceToMove().getPiece());
                     opposingFound = true;
                 }
@@ -416,6 +418,7 @@ public class PlayerInput {
                 {
                     deadPieceStore.setX_location(this.getPieceToMove().getX_location() - 1);
                     deadPieceStore.setY_location(this.getPieceToMove().getX_location() - 1);
+                    deadPieceStore.setPiece(board[this.getX_direction()][this.getY_direction()].getPiece());
                     board[this.getX_direction()][this.getY_direction()].setPiece(this.getPieceToMove().getPiece());
                     opposingFound = true;
                 }
@@ -423,18 +426,26 @@ public class PlayerInput {
                 {
                     deadPieceStore.setX_location(this.getPieceToMove().getX_location() - 1);
                     deadPieceStore.setY_location(this.getPieceToMove().getX_location() + 1);
+                    deadPieceStore.setPiece(board[this.getX_direction()][this.getY_direction()].getPiece());
                     board[this.getX_direction()][this.getY_direction()].setPiece(this.getPieceToMove().getPiece());
                     opposingFound = true;
                 }
             }
         }
-        else if (this.getPieceToMove().getPiece().getClass().equals(Rook.class))
+        else if (this.getPieceToMove().getPiece().getClass().equals(Rook.class) || this.getPieceToMove().getPiece().getClass().equals(Knight.class) || this.getPieceToMove().getPiece().getClass().equals(Bishop.class) || this.getPieceToMove().getPiece().getClass().equals(Queen.class) || this.getPieceToMove().getPiece().getClass().equals(Bishop.class) || this.getPieceToMove().getPiece().getClass().equals(King.class))
         {
-            if ((this.getPieceToMove().getX_location() > this.getX_direction()) && (this.getPieceToMove().getY_location() == this.getY_direction()))
+            if (board[this.getX_direction()][this.getY_direction()].getPiece() != null && board[this.getX_direction()][this.getY_direction()].getPiece().colour != this.getPlayer().getColour())
             {
-                if (board[this.getX_direction()][this.getY_direction()].getPiece() != null && board[this.getX_direction()][this.getY_direction()].getPiece().colour != this.getPlayer().getColour())
+                int moveChecker = this.getPieceToMove().getPiece().CheckMove(this.getX_direction(), this.getY_direction(), this.getPieceToMove(), board);
+
+                if (moveChecker == 1)
                 {
-                    boolean moveChecker = this.getPieceToMove().getPiece().CheckMove(piece, this.getX_direction(), this.getY_direction(), this.getPieceToMove(), board);
+                    deadPieceStore.setX_location(this.getX_direction());
+                    deadPieceStore.setY_location(this.getY_direction());
+                    deadPieceStore.setPiece(board[this.getX_direction()][this.getY_direction()].getPiece());
+                    board[this.getX_direction()][this.getY_direction()].setPiece(this.getPieceToMove().getPiece());
+                    opposingFound = true;
+
                 }
             }
         }
