@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
 public class ChessGUIController implements ActionListener{
     
     ChessGUIView view;
+    ChessGUIModel model;
     
     ChessGUIController()
     {
@@ -51,6 +52,11 @@ public class ChessGUIController implements ActionListener{
     public void addView(ChessGUIView view)
     {
         this.view = view;
+    }
+    
+    public void addModel(ChessGUIModel model)
+    {
+        this.model = model;
     }
     
     
