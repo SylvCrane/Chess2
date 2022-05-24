@@ -33,8 +33,28 @@ public class ChessGUIModel extends Observable{
         {
             this.setPlayer2(player);
         }
+        
+        
     }
     
+    public void setCurrentPlayer()
+    {
+        if (this.currentPlayer == null)
+        {
+          this.currentPlayer = this.player1;  
+        }
+        else if (this.currentPlayer == this.player1)
+        {
+            this.currentPlayer = this.player2;
+        }
+        else if (this.currentPlayer == this.player2)
+        {
+            this.currentPlayer = this.player1;
+        }   
+        
+        notifyObservers(this.currentPlayer);
+    }
+      
     public void selectPiece(int x, int y)
     {
         this.setPieceToMove(this.board[x][y]);
@@ -144,8 +164,4 @@ public class ChessGUIModel extends Observable{
     public void setDestination(Square destination) {
         this.destination = destination;
     }
-    
-    
-    
-    
 }

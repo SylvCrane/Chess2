@@ -33,6 +33,7 @@ public class ChessGUIView extends JFrame implements Observer{
     private JPanel spaceMaker;
     private JLabel[][] labelPieces;
     
+    
     public ChessGUIView()
     {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
