@@ -4,6 +4,7 @@
  */
 package chess2;
 
+import Model.Square;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -32,7 +33,8 @@ public class ChessGUIView extends JFrame implements Observer{
     private JPanel gameState;
     private JPanel spaceMaker;
     private JLabel[][] labelPieces;
-    
+    private boolean pieceSelected;
+    private boolean destinationSelected;
     
     public ChessGUIView()
     {
@@ -302,7 +304,78 @@ public class ChessGUIView extends JFrame implements Observer{
     
     @Override
     public void update(Observable arg0, Object arg1) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (!this.isPieceSelected())
+        {
+            if ((Square)arg1 == null)
+            {
+                JLabel notApplicable = new JLabel("You cannot select a piece at this location");
+                
+                this.currentStatus.add(notApplicable);
+            }
+            else
+            {
+                Square lightUpSquare = (Square)arg1;
+                this.buttonSquares[lightUpSquare.getX_location()][lightUpSquare.getY_location()].setBackground(Color.GREEN);
+            }
+        }
+        else if (!this.isDestinationSelected())
+        {
+            if ((Square)arg1 == null)
+            {
+                JLabel moveNotApplicable = new JLabel("You cannot move here");
+                this.currentStatus.add(moveNotApplicable);
+            }
+        }
+    }
+    
+    public void updateBoard(Square[][] board)
+    {
+        for (int x = 0; x < 8; x++)
+        {
+            for (int y = 0; y < 8; y++)
+            {
+                if (board[x][y].getPiece() == null)
+                {
+                    this.labelPieces[x][y].setIcon(null);
+                    this.buttonSquares[x][y].add(this.labelPieces[x][y]);
+                }
+                else
+                {
+                    if (board[x][y].getPiece().pieceName.contains("whiteRook"))
+                    {
+                        
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * @return the pieceSelected
+     */
+    public boolean isPieceSelected() {
+        return pieceSelected;
+    }
+
+    /**
+     * @param pieceSelected the pieceSelected to set
+     */
+    public void setPieceSelected(boolean pieceSelected) {
+        this.pieceSelected = pieceSelected;
+    }
+
+    /**
+     * @return the destinationSelected
+     */
+    public boolean isDestinationSelected() {
+        return destinationSelected;
+    }
+
+    /**
+     * @param destinationSelected the destinationSelected to set
+     */
+    public void setDestinationSelected(boolean destinationSelected) {
+        this.destinationSelected = destinationSelected;
     }
     
     
