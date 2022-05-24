@@ -14,6 +14,7 @@ import java.util.Observer;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
@@ -30,7 +31,7 @@ public class ChessGUIView extends JFrame implements Observer{
     private JButton quitButton;
     private JPanel gameState;
     private JPanel spaceMaker;
-    private ImageIcon[][] pieces;
+    private JLabel[][] labelPieces;
     
     public ChessGUIView()
     {
@@ -150,9 +151,9 @@ public class ChessGUIView extends JFrame implements Observer{
         {
             for (int y = 0; y < 8; y++)
             {
-                if (this.pieces[x][y] != null)
+                if (this.labelPieces[x][y] != null)
                 {
-                    this.buttonSquares[x][y].setIcon(this.pieces[x][y]);
+                    this.buttonSquares[x][y].add(this.labelPieces[x][y]);
                 }
             }
         }
@@ -160,8 +161,10 @@ public class ChessGUIView extends JFrame implements Observer{
     
     public void setStartingImages()
     {
-        this.pieces = new ImageIcon[8][8];
+        this.labelPieces = new JLabel[8][8];
         Image img;
+        ImageIcon imgIco;
+        JLabel label;
         
         for (int x = 0; x < 8; x++)
         {
@@ -172,35 +175,51 @@ public class ChessGUIView extends JFrame implements Observer{
                     switch (x) {
                         case 0:
                             img = new ImageIcon("./resources/whiteRook.png").getImage();
-                            this.pieces[x][y] = new ImageIcon(img);
+                            imgIco = new ImageIcon(img);
+                            this.labelPieces[x][y] = new JLabel();
+                            this.labelPieces[x][y].setIcon(imgIco);
                             break;
                         case 1:
                             img = new ImageIcon("./resources/whiteKnight.png").getImage();
-                            this.pieces[x][y] = new ImageIcon(img);
+                            imgIco = new ImageIcon(img);
+                            this.labelPieces[x][y] = new JLabel();
+                            this.labelPieces[x][y].setIcon(imgIco);
                             break;
                         case 2:
                             img = new ImageIcon("./resources/whiteBishop.png").getImage();
-                            this.pieces[x][y] = new ImageIcon(img);
+                            imgIco = new ImageIcon(img);
+                            this.labelPieces[x][y] = new JLabel();
+                            this.labelPieces[x][y].setIcon(imgIco);
                             break;
                         case 3:
                             img = new ImageIcon("./resources/whiteQueen.png").getImage();
-                            this.pieces[x][y] = new ImageIcon(img);
+                            imgIco = new ImageIcon(img);
+                            this.labelPieces[x][y] = new JLabel();
+                            this.labelPieces[x][y].setIcon(imgIco);
                             break;
                         case 4:
                             img = new ImageIcon("./resources/whiteKing.png").getImage();
-                            this.pieces[x][y] = new ImageIcon(img);
+                            imgIco = new ImageIcon(img);
+                            this.labelPieces[x][y] = new JLabel();
+                            this.labelPieces[x][y].setIcon(imgIco);
                             break;
                         case 5:
                             img = new ImageIcon("./resources/whiteBishop.png").getImage();
-                            this.pieces[x][y] = new ImageIcon(img);
+                            imgIco = new ImageIcon(img);
+                            this.labelPieces[x][y] = new JLabel();
+                            this.labelPieces[x][y].setIcon(imgIco);
                             break;
                         case 6:
                             img = new ImageIcon("./resources/whiteKnight.png").getImage();
-                            this.pieces[x][y] = new ImageIcon(img);
+                            imgIco = new ImageIcon(img);
+                            this.labelPieces[x][y] = new JLabel();
+                            this.labelPieces[x][y].setIcon(imgIco);
                             break;
                         case 7:
                             img = new ImageIcon("./resources/whiteRook.png").getImage();
-                            this.pieces[x][y] = new ImageIcon(img);
+                            imgIco = new ImageIcon(img);
+                            this.labelPieces[x][y] = new JLabel();
+                            this.labelPieces[x][y].setIcon(imgIco);
                             break;
                         default:
                             break;
@@ -209,47 +228,67 @@ public class ChessGUIView extends JFrame implements Observer{
                 else if (y == 1)
                 {
                     img = new ImageIcon("./resources/whitePawn.png").getImage();
-                    this.pieces[x][y] = new ImageIcon(img);
+                    imgIco = new ImageIcon(img);
+                    this.labelPieces[x][y] = new JLabel();
+                    this.labelPieces[x][y].setIcon(imgIco);
                 }
                 else if (y == 6)
                 {
                     img = new ImageIcon("./resources/blackPawn.png").getImage();
-                    this.pieces[x][y] = new ImageIcon(img);
+                    imgIco = new ImageIcon(img);
+                    this.labelPieces[x][y] = new JLabel();
+                    this.labelPieces[x][y].setIcon(imgIco);
                 }
                 else if (y == 7)
                 {
                     switch (x) {
                         case 0:
                             img = new ImageIcon("./resources/blackRook.png").getImage();
-                            this.pieces[x][y] = new ImageIcon(img);
+                            imgIco = new ImageIcon(img);
+                            this.labelPieces[x][y] = new JLabel();
+                            this.labelPieces[x][y].setIcon(imgIco);
                             break;
                         case 1:
                             img = new ImageIcon("./resources/blackKnight.png").getImage();
-                            this.pieces[x][y] = new ImageIcon(img);
+                            imgIco = new ImageIcon(img);
+                            this.labelPieces[x][y] = new JLabel();
+                            this.labelPieces[x][y].setIcon(imgIco);
                             break;
                         case 2:
                             img = new ImageIcon("./resources/blackBishop.png").getImage();
-                            this.pieces[x][y] = new ImageIcon(img);
+                            imgIco = new ImageIcon(img);
+                            this.labelPieces[x][y] = new JLabel();
+                            this.labelPieces[x][y].setIcon(imgIco);
                             break;
                         case 3:
                             img = new ImageIcon("./resources/blackQueen.png").getImage();
-                            this.pieces[x][y] = new ImageIcon(img);
+                            imgIco = new ImageIcon(img);
+                            this.labelPieces[x][y] = new JLabel();
+                            this.labelPieces[x][y].setIcon(imgIco);
                             break;
                         case 4:
                             img = new ImageIcon("./resources/blackKing.png").getImage();
-                            this.pieces[x][y] = new ImageIcon(img);
+                            imgIco = new ImageIcon(img);
+                            this.labelPieces[x][y] = new JLabel();
+                            this.labelPieces[x][y].setIcon(imgIco);
                             break;
                         case 5:
                             img = new ImageIcon("./resources/blackBishop.png").getImage();
-                            this.pieces[x][y] = new ImageIcon(img);
+                            imgIco = new ImageIcon(img);
+                            this.labelPieces[x][y] = new JLabel();
+                            this.labelPieces[x][y].setIcon(imgIco);
                             break;
                         case 6:
                             img = new ImageIcon("./resources/blackKnight.png").getImage();
-                            this.pieces[x][y] = new ImageIcon(img);
+                            imgIco = new ImageIcon(img);
+                            this.labelPieces[x][y] = new JLabel();
+                            this.labelPieces[x][y].setIcon(imgIco);
                             break;
                         case 7:
                             img = new ImageIcon("./resources/blackRook.png").getImage();
-                            this.pieces[x][y] = new ImageIcon(img);
+                            imgIco = new ImageIcon(img);
+                            this.labelPieces[x][y] = new JLabel();
+                            this.labelPieces[x][y].setIcon(imgIco);
                             break;
                         default:
                             break;
