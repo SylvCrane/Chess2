@@ -27,7 +27,7 @@ public class PlayerInput {
         this.y_direction = y_direction;
         this.pieceToMove = pieceToMove;
     }
-   
+
     public boolean playerQuit (String input)
     {
         boolean playerQuits = false;
