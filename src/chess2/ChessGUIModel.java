@@ -33,8 +33,6 @@ public class ChessGUIModel extends Observable{
         {
             this.setPlayer2(player);
         }
-        
-        
     }
     
     public void setCurrentPlayer()
