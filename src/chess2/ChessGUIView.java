@@ -165,9 +165,7 @@ public class ChessGUIView extends JFrame implements Observer{
     public void setStartingImages()
     {
         this.labelPieces = new JLabel[8][8];
-        Image img;
-        ImageIcon imgIco;
-        JLabel label;
+        ChessGUIPieceSetter establishPieces = new ChessGUIPieceSetter();
         
         for (int x = 0; x < 8; x++)
         {
@@ -177,52 +175,28 @@ public class ChessGUIView extends JFrame implements Observer{
                 {
                     switch (x) {
                         case 0:
-                            img = new ImageIcon("./resources/whiteRook.png").getImage();
-                            imgIco = new ImageIcon(img);
-                            this.labelPieces[x][y] = new JLabel();
-                            this.labelPieces[x][y].setIcon(imgIco);
+                            establishPieces.updateWhiteRook(this.labelPieces[x][y]);
                             break;
                         case 1:
-                            img = new ImageIcon("./resources/whiteKnight.png").getImage();
-                            imgIco = new ImageIcon(img);
-                            this.labelPieces[x][y] = new JLabel();
-                            this.labelPieces[x][y].setIcon(imgIco);
+                            establishPieces.updateWhiteKnight(this.labelPieces[x][y]);
                             break;
                         case 2:
-                            img = new ImageIcon("./resources/whiteBishop.png").getImage();
-                            imgIco = new ImageIcon(img);
-                            this.labelPieces[x][y] = new JLabel();
-                            this.labelPieces[x][y].setIcon(imgIco);
+                            establishPieces.updateWhiteBishop(this.labelPieces[x][y]);
                             break;
                         case 3:
-                            img = new ImageIcon("./resources/whiteQueen.png").getImage();
-                            imgIco = new ImageIcon(img);
-                            this.labelPieces[x][y] = new JLabel();
-                            this.labelPieces[x][y].setIcon(imgIco);
+                            establishPieces.updateWhiteKing(this.labelPieces[x][y]);
                             break;
                         case 4:
-                            img = new ImageIcon("./resources/whiteKing.png").getImage();
-                            imgIco = new ImageIcon(img);
-                            this.labelPieces[x][y] = new JLabel();
-                            this.labelPieces[x][y].setIcon(imgIco);
+                            establishPieces.updateWhiteQueen(this.labelPieces[x][y]);
                             break;
                         case 5:
-                            img = new ImageIcon("./resources/whiteBishop.png").getImage();
-                            imgIco = new ImageIcon(img);
-                            this.labelPieces[x][y] = new JLabel();
-                            this.labelPieces[x][y].setIcon(imgIco);
+                            establishPieces.updateWhiteBishop(this.labelPieces[x][y]);
                             break;
                         case 6:
-                            img = new ImageIcon("./resources/whiteKnight.png").getImage();
-                            imgIco = new ImageIcon(img);
-                            this.labelPieces[x][y] = new JLabel();
-                            this.labelPieces[x][y].setIcon(imgIco);
+                            establishPieces.updateWhiteKnight(this.labelPieces[x][y]);
                             break;
                         case 7:
-                            img = new ImageIcon("./resources/whiteRook.png").getImage();
-                            imgIco = new ImageIcon(img);
-                            this.labelPieces[x][y] = new JLabel();
-                            this.labelPieces[x][y].setIcon(imgIco);
+                            establishPieces.updateWhiteRook(this.labelPieces[x][y]);
                             break;
                         default:
                             break;
@@ -230,68 +204,38 @@ public class ChessGUIView extends JFrame implements Observer{
                 }
                 else if (y == 1)
                 {
-                    img = new ImageIcon("./resources/whitePawn.png").getImage();
-                    imgIco = new ImageIcon(img);
-                    this.labelPieces[x][y] = new JLabel();
-                    this.labelPieces[x][y].setIcon(imgIco);
+                    establishPieces.updateWhitePawn(this.labelPieces[x][y]);
                 }
                 else if (y == 6)
                 {
-                    img = new ImageIcon("./resources/blackPawn.png").getImage();
-                    imgIco = new ImageIcon(img);
-                    this.labelPieces[x][y] = new JLabel();
-                    this.labelPieces[x][y].setIcon(imgIco);
+                    establishPieces.updateBlackPawn(this.labelPieces[x][y]);
                 }
                 else if (y == 7)
                 {
                     switch (x) {
                         case 0:
-                            img = new ImageIcon("./resources/blackRook.png").getImage();
-                            imgIco = new ImageIcon(img);
-                            this.labelPieces[x][y] = new JLabel();
-                            this.labelPieces[x][y].setIcon(imgIco);
+                            establishPieces.updateBlackRook(this.labelPieces[x][y]);
                             break;
                         case 1:
-                            img = new ImageIcon("./resources/blackKnight.png").getImage();
-                            imgIco = new ImageIcon(img);
-                            this.labelPieces[x][y] = new JLabel();
-                            this.labelPieces[x][y].setIcon(imgIco);
+                            establishPieces.updateBlackKnight(this.labelPieces[x][y]);
                             break;
                         case 2:
-                            img = new ImageIcon("./resources/blackBishop.png").getImage();
-                            imgIco = new ImageIcon(img);
-                            this.labelPieces[x][y] = new JLabel();
-                            this.labelPieces[x][y].setIcon(imgIco);
+                            establishPieces.updateBlackBishop(this.labelPieces[x][y]);
                             break;
                         case 3:
-                            img = new ImageIcon("./resources/blackQueen.png").getImage();
-                            imgIco = new ImageIcon(img);
-                            this.labelPieces[x][y] = new JLabel();
-                            this.labelPieces[x][y].setIcon(imgIco);
+                            establishPieces.updateBlackKing(this.labelPieces[x][y]);
                             break;
                         case 4:
-                            img = new ImageIcon("./resources/blackKing.png").getImage();
-                            imgIco = new ImageIcon(img);
-                            this.labelPieces[x][y] = new JLabel();
-                            this.labelPieces[x][y].setIcon(imgIco);
+                            establishPieces.updateBlackQueen(this.labelPieces[x][y]);
                             break;
                         case 5:
-                            img = new ImageIcon("./resources/blackBishop.png").getImage();
-                            imgIco = new ImageIcon(img);
-                            this.labelPieces[x][y] = new JLabel();
-                            this.labelPieces[x][y].setIcon(imgIco);
+                            establishPieces.updateBlackBishop(this.labelPieces[x][y]);
                             break;
                         case 6:
-                            img = new ImageIcon("./resources/blackKnight.png").getImage();
-                            imgIco = new ImageIcon(img);
-                            this.labelPieces[x][y] = new JLabel();
-                            this.labelPieces[x][y].setIcon(imgIco);
+                            establishPieces.updateBlackKnight(this.labelPieces[x][y]);
                             break;
                         case 7:
-                            img = new ImageIcon("./resources/blackRook.png").getImage();
-                            imgIco = new ImageIcon(img);
-                            this.labelPieces[x][y] = new JLabel();
-                            this.labelPieces[x][y].setIcon(imgIco);
+                            establishPieces.updateBlackRook(this.labelPieces[x][y]);
                             break;
                         default:
                             break;
@@ -300,7 +244,6 @@ public class ChessGUIView extends JFrame implements Observer{
             }
         }
     }
-    
     
     @Override
     public void update(Observable arg0, Object arg1) {
@@ -316,6 +259,7 @@ public class ChessGUIView extends JFrame implements Observer{
             {
                 Square lightUpSquare = (Square)arg1;
                 this.buttonSquares[lightUpSquare.getX_location()][lightUpSquare.getY_location()].setBackground(Color.GREEN);
+                this.setPieceSelected(true);
             }
         }
         else if (!this.isDestinationSelected())
@@ -325,11 +269,17 @@ public class ChessGUIView extends JFrame implements Observer{
                 JLabel moveNotApplicable = new JLabel("You cannot move here");
                 this.currentStatus.add(moveNotApplicable);
             }
+            else
+            {
+                this.setPieceSelected(true);
+            }
         }
     }
     
     public void updateBoard(Square[][] board)
     {
+        ChessGUIPieceSetter updatePieces = new ChessGUIPieceSetter();
+        
         for (int x = 0; x < 8; x++)
         {
             for (int y = 0; y < 8; y++)
@@ -343,7 +293,63 @@ public class ChessGUIView extends JFrame implements Observer{
                 {
                     if (board[x][y].getPiece().pieceName.contains("whiteRook"))
                     {
-                        
+                        updatePieces.updateWhiteRook(this.labelPieces[x][y]);
+                        this.buttonSquares[x][y].add(this.labelPieces[x][y]);
+                    }
+                    else if (board[x][y].getPiece().pieceName.contains("whiteKnight")) 
+                    {
+                        updatePieces.updateWhiteKnight(this.labelPieces[x][y]);
+                        this.buttonSquares[x][y].add(this.labelPieces[x][y]);
+                    }
+                    else if (board[x][y].getPiece().pieceName.contains("whiteBishop")) 
+                    {
+                        updatePieces.updateWhiteBishop(this.labelPieces[x][y]);
+                        this.buttonSquares[x][y].add(this.labelPieces[x][y]);
+                    }
+                    else if (board[x][y].getPiece().pieceName.contains("whiteKing")) 
+                    {
+                        updatePieces.updateWhiteKing(this.labelPieces[x][y]);
+                        this.buttonSquares[x][y].add(this.labelPieces[x][y]);
+                    }
+                    else if (board[x][y].getPiece().pieceName.contains("whiteQueen")) 
+                    {
+                        updatePieces.updateWhiteQueen(this.labelPieces[x][y]);
+                        this.buttonSquares[x][y].add(this.labelPieces[x][y]);
+                    }
+                    else if (board[x][y].getPiece().pieceName.contains("whitePawn"))
+                    {
+                        updatePieces.updateWhitePawn(this.labelPieces[x][y]);
+                        this.buttonSquares[x][y].add(this.labelPieces[x][y]);
+                    }
+                    else if (board[x][y].getPiece().pieceName.contains("blackPawn"))
+                    {
+                        updatePieces.updateBlackPawn(this.labelPieces[x][y]);
+                        this.buttonSquares[x][y].add(this.labelPieces[x][y]);
+                    }
+                    else if (board[x][y].getPiece().pieceName.contains("blackRook"))
+                    {
+                        updatePieces.updateBlackRook(this.labelPieces[x][y]);
+                        this.buttonSquares[x][y].add(this.labelPieces[x][y]);
+                    }
+                    else if (board[x][y].getPiece().pieceName.contains("blackKnight")) 
+                    {
+                        updatePieces.updateBlackKnight(this.labelPieces[x][y]);
+                        this.buttonSquares[x][y].add(this.labelPieces[x][y]);
+                    }
+                    else if (board[x][y].getPiece().pieceName.contains("blackBishop")) 
+                    {
+                        updatePieces.updateBlackBishop(this.labelPieces[x][y]);
+                        this.buttonSquares[x][y].add(this.labelPieces[x][y]);
+                    }
+                    else if (board[x][y].getPiece().pieceName.contains("blackKing")) 
+                    {
+                        updatePieces.updateBlackKing(this.labelPieces[x][y]);
+                        this.buttonSquares[x][y].add(this.labelPieces[x][y]);
+                    }
+                    else if (board[x][y].getPiece().pieceName.contains("blackQueen")) 
+                    {
+                         updatePieces.updateBlackQueen(this.labelPieces[x][y]);
+                        this.buttonSquares[x][y].add(this.labelPieces[x][y]);
                     }
                 }
             }
