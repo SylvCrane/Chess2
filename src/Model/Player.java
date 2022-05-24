@@ -63,9 +63,7 @@ public class Player {
          * This instance of file input and output makes it substantially easier to print the pieces, 
          * as otherwise a printing chain would be required elsewhere.
          */
-        fileInputOutput playerIO = new fileInputOutput(null, null);
-        playerIO.writePlayerPieces(playerPieces, board);
-        
+      
     }
     
     /**
