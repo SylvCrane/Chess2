@@ -4,8 +4,11 @@
  */
 package chess2;
 
+import Model.PlayerInput;
+import Model.Square;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JLabel;
 
 /**
  *
@@ -26,24 +29,34 @@ public class ChessGUIController implements ActionListener{
         
         String buttonName = arg0.getActionCommand();
         
-        if (buttonName.equals("quit"))
+        if (buttonName.equals("Enter"))
+        {
+            this.view.setPlayer1(new JLabel());
+            this.view.getPlayer1().setText(this.view.getPlayer1Field().getText());
+            this.view.setPlayer2(new JLabel());
+            this.view.getPlayer2().setText(this.view.getPlayer2Field().getText());
+            this.view.mainGame();
+        }
+        else if (buttonName.equals("quit"))
         {
             System.out.println("You pressed the quit button");
         }
         else
         {
-            StringBuilder x = new StringBuilder();
-            StringBuilder y = new StringBuilder();
+            int x = Integer.valueOf(buttonName.charAt(0)) - 48;
+            int y = Integer.valueOf(buttonName.charAt(1)) - 48;
             
-            StringBuilder squareName = new StringBuilder();
+       
             
-            int index = 0;
-            
-            x.append(buttonName.charAt(index));
-            index++;
-            y.append(buttonName.charAt(index));
-            
-            System.out.println("You pressed square[" + x.toString() + "][" + y.toString() + "]");
+            if (!this.view.isPieceSelected())
+            {
+                this.model.selectPiece(x, y);
+            }
+            else if (!this.view.isDestinationSelected())
+            {
+                this.model.selectDestination(x, y);
+                this.model.newPlayerTurn();
+            }
           
         }
         

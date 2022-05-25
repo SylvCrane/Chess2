@@ -35,7 +35,7 @@ public class ChessGUIModel extends Observable{
         }
     }
     
-    public void setCurrentPlayer()
+    public void newPlayerTurn()
     {
         if (this.currentPlayer == null)
         {
@@ -50,19 +50,68 @@ public class ChessGUIModel extends Observable{
             this.currentPlayer = this.player1;
         }   
         
-        notifyObservers(this.currentPlayer);
+        
     }
       
     public void selectPiece(int x, int y)
     {
-        this.setPieceToMove(this.board[x][y]);
+        PlayerInput input = new PlayerInput(this.currentPlayer, this.board[x][y].getPiece().potential_moves, 0, 0, this.board[x][y]);
+        this.setInput(input);
+        boolean appropriate = this.getInput().appropriatePiece(this.board, this.board[x][y]);
+        
+        if (!appropriate)
+        {
+            this.setPieceToMove(null);
+        }
+        else
+        {
+            this.setPieceToMove(this.board[x][y]);
+        }
+        
+        setChanged();
         notifyObservers(this.getPieceToMove());
     }
     
     public void selectDestination(int x, int y)
     {
-        this.setDestination(this.board[x][y]);
-        notifyObservers(this.getDestination());
+        this.input.setX_direction(x);
+        this.input.setY_direction(y);
+        
+        boolean directionOkay = this.input.directionCheck(this.board);
+        
+        if (directionOkay)
+        {
+            Square deadPiece = new Square(null, 0, 0);
+            boolean killAndTake = this.input.killAndTake(this.board, deadPiece);
+            
+            if (killAndTake)
+            {
+                setChanged();
+                notifyObservers(this.board);
+            }
+            else
+            {
+                int checker = this.getPieceToMove().getPiece().CheckMove(x, y, this.getPieceToMove(), this.getBoard());
+                
+                if (checker == 1)
+                {
+                    this.getPieceToMove().getPiece().MakeMove(x, y, this.getPieceToMove(), this.getBoard());
+                    setChanged();
+                    notifyObservers(this.board);
+                }
+                else
+                {
+                    setChanged();
+                    notifyObservers(null);
+                }
+            }
+        }
+        else
+        {
+            setChanged();
+            this.notifyObservers(null);
+        }
+        
     }
 
     /**

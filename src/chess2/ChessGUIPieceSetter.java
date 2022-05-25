@@ -23,100 +23,124 @@ public class ChessGUIPieceSetter {
         this.imgico = null;
     }
     
-    public void updateWhiteRook(JLabel pieceSquare)
+    public JLabel updateWhiteRook()
     {
         this.img = new ImageIcon("./resources/whiteRook.png").getImage();
         this.imgico = new ImageIcon(img);
-        pieceSquare = new JLabel();
+        JLabel pieceSquare = new JLabel();
         pieceSquare.setIcon(imgico);
+        
+        return pieceSquare;
     }
     
-    public void updateWhiteKnight(JLabel pieceSquare)
+    public JLabel updateWhiteKnight()
     {
         this.img = new ImageIcon("./resources/whiteKnight.png").getImage();
         this.imgico = new ImageIcon(img);
-        pieceSquare = new JLabel();
+        JLabel pieceSquare = new JLabel();
         pieceSquare.setIcon(imgico);
+        
+        return pieceSquare;
     }
     
-    public void updateWhiteBishop(JLabel pieceSquare)
+    public JLabel updateWhiteBishop()
     {
         this.img = new ImageIcon("./resources/whiteBishop.png").getImage();
         this.imgico = new ImageIcon(img);
-        pieceSquare = new JLabel();
+        JLabel pieceSquare = new JLabel();
         pieceSquare.setIcon(imgico);
+        
+        return pieceSquare;
     }
     
-    public void updateWhiteKing(JLabel pieceSquare)
+    public JLabel updateWhiteKing()
     {
         this.img = new ImageIcon("./resources/whiteKing.png").getImage();
         this.imgico = new ImageIcon(img);
-        pieceSquare = new JLabel();
+        JLabel pieceSquare = new JLabel();
         pieceSquare.setIcon(imgico);
+        
+        return pieceSquare;
     }
     
-    public void updateWhiteQueen(JLabel pieceSquare)
+    public JLabel updateWhiteQueen()
     {
         this.img = new ImageIcon("./resources/whiteQueen.png").getImage();
         this.imgico = new ImageIcon(img);
-        pieceSquare = new JLabel();
+        JLabel pieceSquare = new JLabel();
         pieceSquare.setIcon(imgico);
+        
+        return pieceSquare; 
     }
     
-    public void updateWhitePawn(JLabel pieceSquare)
+    public JLabel updateWhitePawn()
     {
         this.img = new ImageIcon("./resources/whitePawn.png").getImage();
         this.imgico = new ImageIcon(img);
-        pieceSquare = new JLabel();
+        JLabel pieceSquare = new JLabel();
         pieceSquare.setIcon(imgico);
+        
+        return pieceSquare; 
     }
     
-    public void updateBlackPawn(JLabel pieceSquare)
+    public JLabel updateBlackPawn()
     {
         this.img = new ImageIcon("./resources/blackPawn.png").getImage();
         this.imgico = new ImageIcon(img);
-        pieceSquare = new JLabel();
+        JLabel pieceSquare = new JLabel();
         pieceSquare.setIcon(imgico);
+        
+        return pieceSquare; 
     }
     
-    public void updateBlackRook(JLabel pieceSquare)
+    public JLabel updateBlackRook()
     {
         this.img = new ImageIcon("./resources/blackRook.png").getImage();
         this.imgico = new ImageIcon(img);
-        pieceSquare = new JLabel();
+        JLabel pieceSquare = new JLabel();
         pieceSquare.setIcon(imgico);
+        
+        return pieceSquare; 
     }
     
-    public void updateBlackKnight(JLabel pieceSquare)
+    public JLabel updateBlackKnight()
     {
         this.img = new ImageIcon("./resources/blackKnight.png").getImage();
         this.imgico = new ImageIcon(img);
-        pieceSquare = new JLabel();
+        JLabel pieceSquare = new JLabel();
         pieceSquare.setIcon(imgico);
+        
+        return pieceSquare; 
     }
     
-    public void updateBlackBishop(JLabel pieceSquare)
+    public JLabel updateBlackBishop()
     {
         this.img = new ImageIcon("./resources/blackBishop.png").getImage();
         this.imgico = new ImageIcon(img);
-        pieceSquare = new JLabel();
+        JLabel pieceSquare = new JLabel();
         pieceSquare.setIcon(imgico);
+        
+        return pieceSquare; 
     }
     
-    public void updateBlackKing(JLabel pieceSquare)
+    public JLabel updateBlackKing()
     {
         this.img = new ImageIcon("./resources/blackKing.png").getImage();
         this.imgico = new ImageIcon(img);
-        pieceSquare = new JLabel();
+        JLabel pieceSquare = new JLabel();
         pieceSquare.setIcon(imgico);
+        
+        return pieceSquare; 
     }
     
-    public void updateBlackQueen(JLabel pieceSquare)
+    public JLabel updateBlackQueen()
     {
         this.img = new ImageIcon("./resources/blackQueen.png").getImage();
         this.imgico = new ImageIcon(img);
-        pieceSquare = new JLabel();
+        JLabel pieceSquare = new JLabel();
         pieceSquare.setIcon(imgico);
+        
+        return pieceSquare; 
     }
 
     /**
