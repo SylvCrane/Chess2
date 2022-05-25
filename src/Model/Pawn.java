@@ -56,26 +56,25 @@ public class Pawn extends Piece{
             board[pieceToMove.getX_location()][pieceToMove.getY_location()].setPiece(null);
         }
         
-        if (pieceToMove.getPiece().potential_moves == 2)
+        if (board[x_direction][y_direction].getPiece().potential_moves == 2)
         {
-            pieceToMove.getPiece().potential_moves -= 1;
+            board[x_direction][y_direction].getPiece().potential_moves -= 1;
         }
         
         //This is in the case that a pawn reaches the other end of the board. As is traditional in chess, it becomes a queen.
-        if (pieceToMove.getPiece().colour == PlayerColour.WHITE)
+        if (board[x_direction][y_direction].getPiece().colour == PlayerColour.WHITE)
         {
             if ((y_direction) == 7)
             {
                 board[x_direction][y_direction].setPiece(new Queen("whiteQueen", 7, PlayerColour.WHITE));
             }
         }
-        else if (pieceToMove.getPiece().colour == PlayerColour.BLACK)
+        else if (board[x_direction][y_direction].getPiece().colour == PlayerColour.BLACK)
         {
             if ((y_direction) == 0)
             {
                 board[x_direction][y_direction].setPiece(new Queen("blackQueen", 7, PlayerColour.BLACK));
             }
-        }
-       
+        }  
     }
 }
