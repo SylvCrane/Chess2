@@ -27,6 +27,7 @@ public class Player {
      * The player's score, which is updated after the game. This only changed once at the end. If the player wins, it is incremented by one. Otherwise, it changed to 0.
      */
     private int score;
+    private boolean inCheque;
     
     public Player(String name, PlayerColour colour, int score)
     {
@@ -128,6 +129,20 @@ public class Player {
     public String toString()
     {
         return this.getName() + " " + this.score;
+    }
+
+    /**
+     * @return the inCheque
+     */
+    public boolean isInCheque() {
+        return inCheque;
+    }
+
+    /**
+     * @param inCheque the inCheque to set
+     */
+    public void setInCheque(boolean inCheque) {
+        this.inCheque = inCheque;
     }
     
     

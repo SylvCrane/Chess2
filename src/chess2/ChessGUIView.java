@@ -5,6 +5,7 @@
 package chess2;
 
 import Model.Square;
+import Model.chequePackage;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -46,6 +47,7 @@ public class ChessGUIView extends JFrame implements Observer{
     private JLabel title;
     private JLabel player1;
     private JLabel player2;
+    private JLabel currentPlayer;
     
     
     public ChessGUIView()
@@ -79,10 +81,12 @@ public class ChessGUIView extends JFrame implements Observer{
     }
     
     public void mainGame()
-    {
+    {  
         this.remove(this.chessTitle);
         this.remove(this.nameField);
-        this.currentStatus.setText(this.player1.getText() + ", it is now your turn");
+        this.currentPlayer = new JLabel();
+        this.currentPlayer.setText(this.player1.getText());
+        this.currentStatus.setText(this.currentPlayer.getText() + ", it is now your turn");
         this.gameState = new JPanel();
         this.gameState.setLayout(new FlowLayout(FlowLayout.CENTER));
      
@@ -332,6 +336,7 @@ public class ChessGUIView extends JFrame implements Observer{
     
     @Override
     public void update(Observable arg0, Object arg1) {
+        
         if (!this.isPieceSelected())
         {
             if ((Square)arg1 == null)
@@ -351,23 +356,50 @@ public class ChessGUIView extends JFrame implements Observer{
         }
         else if (!this.isDestinationSelected())
         {
-            if ((Square[][])arg1 == null)
+            if (arg1.getClass() == Square[][].class)
             {
-                this.currentStatus.setText("You cannot move here");
+                if ((Square[][])arg1 == null)
+                {
+                    this.currentStatus.setText("You cannot move here");
+                }
+                else if ((Square[][])arg1 != null)
+                {
+                    this.updateBoard((Square[][])arg1);
+                    this.resetColours();
+                    
+                }
             }
-            else
+            else if (arg1.getClass() == chequePackage.class)
             {
-                this.setPieceSelected(false);
-                this.updateBoard((Square[][])arg1);
-                this.resetColours();
-                if (this.currentStatus.getText().contains(this.player1.getText()))
+                chequePackage chequeView = (chequePackage)arg1;
+                
+                if (!chequeView.getChequeBoolean()[0])
                 {
+                    if (this.currentPlayer.getText().contains(this.player1.getText()))
+                    {
                     this.currentStatus.setText(this.player2.getText() + ", it is now your turn");
-                }
-                else
-                {
+                    this.currentPlayer.setText(this.player2.getText());
+                    }
+                    else
+                    {
                     this.currentStatus.setText(this.player1.getText() + ", it is now your turn");
+                    this.currentPlayer.setText(this.player1.getText());
+                    }
+                    
+                    this.setPieceSelected(false);
                 }
+                else if (chequeView.getChequeBoolean()[0])
+                {
+                    this.updateBoard(chequeView.getBoard());
+                    this.currentStatus.setText(this.currentPlayer.getText());
+                    this.setPieceSelected(false);
+                }
+                
+                if (chequeView.getChequeBoolean()[1])
+                {
+                    this.setVisible(false);
+                    dispose();
+                }   
             }
         }
     }

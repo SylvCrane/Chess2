@@ -4,9 +4,11 @@
  */
 package chess2;
 
+import Model.Cheque;
 import Model.Player;
 import Model.PlayerInput;
 import Model.Square;
+import Model.chequePackage;
 import java.util.Observable;
 
 /**
@@ -22,6 +24,8 @@ public class ChessGUIModel extends Observable{
     private PlayerInput input;
     private Square pieceToMove;
     private Square destination;
+    private Square deadPiece;
+    private chequePackage chequePackage;
     
     public void instantiatePlayer(Player player)
     {
@@ -81,8 +85,8 @@ public class ChessGUIModel extends Observable{
         
         if (directionOkay)
         {
-            Square deadPiece = new Square(null, 0, 0);
-            boolean killAndTake = this.input.killAndTake(this.board, deadPiece);
+            this.deadPiece = new Square(null, 0, 0);
+            boolean killAndTake = this.input.killAndTake(this.board, this.deadPiece);
             
             if (killAndTake)
             {
@@ -110,8 +114,59 @@ public class ChessGUIModel extends Observable{
         {
             setChanged();
             this.notifyObservers(null);
+        }     
+    }
+    
+    public void chequePlayer()
+    {
+        this.setChequePackage(new chequePackage(this.getBoard(), new boolean[2]));
+        
+        boolean[] cheque = new boolean[2];
+        
+        this.getChequePackage().setChequeBoolean(cheque);
+        
+        Player oppositePlayer;
+        
+        if (this.currentPlayer == this.player1)
+        {
+            oppositePlayer = this.player2;
+        }
+        else
+        {
+            oppositePlayer = this.player1;
         }
         
+        Cheque youreInCheque = new Cheque(this.currentPlayer);
+        youreInCheque.findKing(this.board, this.currentPlayer);
+        this.getChequePackage().getChequeBoolean()[0] = youreInCheque.checkForCheque(this.board, this.currentPlayer);
+        
+        if (this.getChequePackage().getChequeBoolean()[0])
+        {
+            this.board[this.getPieceToMove().getX_location()][this.getPieceToMove().getY_location()].setPiece(this.getPieceToMove().getPiece());
+            
+            if (this.deadPiece.getPiece() != null)
+            {
+                this.board[this.deadPiece.getX_location()][this.deadPiece.getY_location()].setPiece(this.deadPiece.getPiece());
+            }
+            setChanged();
+            notifyObservers(this.getChequePackage());
+        }
+        else
+        {
+            Cheque theyreInCheque = new Cheque(oppositePlayer);
+            theyreInCheque.findKing(this.board, oppositePlayer);
+            boolean oppositePlayerInCheque = theyreInCheque.checkForCheque(this.board, oppositePlayer);
+            
+            if (oppositePlayerInCheque)
+            {
+                this.getChequePackage().getChequeBoolean()[1] = theyreInCheque.checkMate(this.board, oppositePlayer);
+            }
+            
+            
+            this.newPlayerTurn();
+            setChanged();
+            notifyObservers(this.getChequePackage());
+        }
     }
 
     /**
@@ -210,5 +265,33 @@ public class ChessGUIModel extends Observable{
      */
     public void setDestination(Square destination) {
         this.destination = destination;
+    }
+
+    /**
+     * @return the deadPiece
+     */
+    public Square getDeadPiece() {
+        return deadPiece;
+    }
+
+    /**
+     * @param deadPiece the deadPiece to set
+     */
+    public void setDeadPiece(Square deadPiece) {
+        this.deadPiece = deadPiece;
+    }
+
+    /**
+     * @return the chequePackage
+     */
+    public chequePackage getChequePackage() {
+        return chequePackage;
+    }
+
+    /**
+     * @param chequePackage the chequePackage to set
+     */
+    public void setChequePackage(chequePackage chequePackage) {
+        this.chequePackage = chequePackage;
     }
 }

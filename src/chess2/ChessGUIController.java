@@ -55,11 +55,9 @@ public class ChessGUIController implements ActionListener{
             else if (!this.view.isDestinationSelected())
             {
                 this.model.selectDestination(x, y);
-                this.model.newPlayerTurn();
+                this.model.chequePlayer();
             }
-          
         }
-        
     }
     
     public void addView(ChessGUIView view)
