@@ -120,14 +120,7 @@ public class chessConnection
         
         try
         {
-            Statement statement = conn.createStatement();
-
-            ResultSet rs = statement.executeQuery("SELECT Name FROM userData WHERE Name = '" + username + "'");
-            
-            if (rs.next())
-            {
-                String currentName;
-
+            Statement statement = conn.createStatement();      
             ResultSet rs = statement.executeQuery("SELECT Name, score FROM userData WHERE Name = '" + username + "'");
             
             if (rs.next())
