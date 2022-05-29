@@ -11,10 +11,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-<<<<<<< HEAD
-=======
 import java.util.HashSet;
->>>>>>> Development
+
 
 /**
  *
@@ -48,29 +46,22 @@ public class chessConnection
             {
                 statement.executeUpdate("CREATE TABLE "  + table + " (Name VARCHAR(20), score INT)");
             }
-<<<<<<< HEAD
-=======
-            
+   
             table = "playerPieces";
             
             if (!checkTableExisting(table))
             {
                 statement.executeUpdate("CREATE TABLE "  + table + " (pieceName VARCHAR(20), colour VARCHAR(5), potentialMoves INT)");
             }
-            
->>>>>>> Development
+
         }
         catch(Exception e)
         {
             System.out.println("Database connection is compromised");
         }
     }
-    
-<<<<<<< HEAD
-    public boolean nameChecker(String username)
-    {
-        boolean nameChecker = false;
-=======
+
+ 
     public void writePieces() throws SQLException
     {
         int count = 0;
@@ -121,22 +112,22 @@ public class chessConnection
         }
     }
     
-    public Player nameChecker(String username)
+    public Player nameChecker(String username) throws SQLException
     {
         boolean nameChecker = false;
         Player playerIfFound = null;
->>>>>>> Development
+
         
         try
         {
             Statement statement = conn.createStatement();
-<<<<<<< HEAD
+
             ResultSet rs = statement.executeQuery("SELECT Name FROM userData WHERE Name = '" + username + "'");
             
             if (rs.next())
             {
-                String currentName
-=======
+                String currentName;
+
             ResultSet rs = statement.executeQuery("SELECT Name, score FROM userData WHERE Name = '" + username + "'");
             
             if (rs.next())
@@ -158,6 +149,10 @@ public class chessConnection
         return playerIfFound;
     }
     
+    /**
+     *
+     * @param PlayerPieces
+     */
     public void readPieces(HashSet<Piece> PlayerPieces)
     {
         try
@@ -237,7 +232,7 @@ public class chessConnection
                         PlayerPieces.add(new King(this.pieceName, this.potentialMoves, PlayerColour.BLACK));
                     }
                 }
->>>>>>> Development
+
             }
         }
         catch (SQLException e)
