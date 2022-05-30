@@ -129,7 +129,12 @@ public class PlayerInput {
                         this.getPieceToMove().getPiece().direction = Direction.NORTHEAST;
                     }
                 }
-                else if ((this.getPieceToMove().getY_location() + this.getPieceToMove().getPiece().potential_moves) == this.getY_direction())
+                else if ((this.getPieceToMove().getY_location() + 1) == this.getY_direction() && (this.getPieceToMove().getX_location() == this.getX_direction()))
+                {
+                    directionOkay = true;
+                    this.getPieceToMove().getPiece().direction = Direction.NORTH;
+                }
+                else if ((this.getPieceToMove().getY_location() + 2) == this.getY_direction() && (this.getPieceToMove().getX_location() == this.getX_direction()))
                 {
                     directionOkay = true;
                     this.getPieceToMove().getPiece().direction = Direction.NORTH;
@@ -153,7 +158,12 @@ public class PlayerInput {
                         this.getPieceToMove().getPiece().direction = Direction.SOUTHEAST;
                     }
                 }
-                else if ((this.getPieceToMove().getY_location() - this.getPieceToMove().getPiece().potential_moves) == this.getY_direction())
+                else if ((this.getPieceToMove().getY_location() - 1) == this.getY_direction() && (this.getPieceToMove().getX_location() == this.getX_direction()))
+                {
+                    directionOkay = true;
+                    this.getPieceToMove().getPiece().direction = Direction.NORTH;
+                }
+                else if ((this.getPieceToMove().getY_location() - 2) == this.getY_direction() && (this.getPieceToMove().getX_location() == this.getX_direction()))
                 {
                     directionOkay = true;
                     this.getPieceToMove().getPiece().direction = Direction.NORTH;
@@ -232,7 +242,7 @@ public class PlayerInput {
                 directionOkay = true;
                 this.getPieceToMove().getPiece().direction = Direction.NORTHWESTWEST;
             }
-            else if (((this.getPieceToMove().getX_location() - 1) == (this.getX_direction())) && ((this.getPieceToMove().getY_location() - 2) == (this.getY_direction())))
+            else if (((this.getPieceToMove().getX_location() - 1) == (this.getX_direction())) && ((this.getPieceToMove().getY_location() + 2) == (this.getY_direction())))
             {
                 directionOkay = true;
                 this.getPieceToMove().getPiece().direction = Direction.NORTHNORTHWEST;
@@ -266,7 +276,7 @@ public class PlayerInput {
             }
             else if ((this.getPieceToMove().getX_location() > this.getX_direction()) && (this.getPieceToMove().getY_location() < this.getY_direction()))
             {
-                if ((this.getPieceToMove().getX_location() - this.getX_direction()) == (this.getPieceToMove().getY_location() - this.getY_direction()))
+                if ((this.getX_direction()) - this.getPieceToMove().getX_location() == (this.getPieceToMove().getY_location() - this.getY_direction()))
                 {
                     directionOkay = true;
                     this.getPieceToMove().getPiece().direction = Direction.NORTHWEST;
@@ -321,7 +331,7 @@ public class PlayerInput {
             }
             else if ((this.getPieceToMove().getX_location() > this.getX_direction()) && (this.getPieceToMove().getY_location() < this.getY_direction()))
             {
-                if ((this.getPieceToMove().getX_location() - this.getX_direction()) == (this.getPieceToMove().getY_location() - this.getY_direction()))
+                if ((this.getX_direction() - this.getPieceToMove().getX_location()) == (this.getPieceToMove().getY_location() - this.getY_direction()))
                 {
                     directionOkay = true;
                     this.getPieceToMove().getPiece().direction = Direction.NORTHWEST;
@@ -391,68 +401,31 @@ public class PlayerInput {
     {
         boolean opposingFound = false;
         
+        KillandTakePieces piecesKill = new KillandTakePieces(this.getX_direction(), this.getY_direction());
+        
         if (this.getPieceToMove().getPiece().getClass().equals(Pawn.class))
         {
-            if (this.getPieceToMove().getPiece().colour.equals(PlayerColour.WHITE))
-            {
-                if (this.getPieceToMove().getPiece().direction == Direction.NORTHWEST)
-                {
-                    deadPieceStore.setX_location(this.getPieceToMove().getX_location() - 1);
-                    deadPieceStore.setY_location(this.getPieceToMove().getX_location() + 1);
-                    deadPieceStore.setPiece(board[this.getX_direction()][this.getY_direction()].getPiece());
-                    board[this.getX_direction()][this.getY_direction()].setPiece(this.getPieceToMove().getPiece());
-                    board[this.getPieceToMove().getX_location()][this.getPieceToMove().getY_location()].setPiece(null);
-                    opposingFound = true;
-                }
-                else if (this.getPieceToMove().getPiece().direction == Direction.NORTHEAST)
-                {
-                    deadPieceStore.setX_location(this.getPieceToMove().getX_location() + 1);
-                    deadPieceStore.setY_location(this.getPieceToMove().getX_location() + 1);
-                    deadPieceStore.setPiece(board[this.getX_direction()][this.getY_direction()].getPiece());
-                    board[this.getX_direction()][this.getY_direction()].setPiece(this.getPieceToMove().getPiece());
-                    board[this.getPieceToMove().getX_location()][this.getPieceToMove().getY_location()].setPiece(null);
-                    opposingFound = true;
-                }
-            }
-            else if (this.getPieceToMove().getPiece().colour.equals(PlayerColour.BLACK))
-            {
-                if (this.getPieceToMove().getPiece().direction == Direction.SOUTHWEST)
-                {
-                    deadPieceStore.setX_location(this.getPieceToMove().getX_location() - 1);
-                    deadPieceStore.setY_location(this.getPieceToMove().getX_location() - 1);
-                    deadPieceStore.setPiece(board[this.getX_direction()][this.getY_direction()].getPiece());
-                    board[this.getX_direction()][this.getY_direction()].setPiece(this.getPieceToMove().getPiece());
-                    board[this.getPieceToMove().getX_location()][this.getPieceToMove().getY_location()].setPiece(null);
-                    opposingFound = true;
-                }
-                else if (this.getPieceToMove().getPiece().direction == Direction.SOUTHEAST)
-                {
-                    deadPieceStore.setX_location(this.getPieceToMove().getX_location() - 1);
-                    deadPieceStore.setY_location(this.getPieceToMove().getX_location() + 1);
-                    deadPieceStore.setPiece(board[this.getX_direction()][this.getY_direction()].getPiece());
-                    board[this.getX_direction()][this.getY_direction()].setPiece(this.getPieceToMove().getPiece());
-                    board[this.getPieceToMove().getX_location()][this.getPieceToMove().getY_location()].setPiece(null);
-                    opposingFound = true;
-                }
-            }
+            opposingFound = piecesKill.killAndTakePawn(board, this.getPieceToMove(), deadPieceStore);
         }
-        else if (this.getPieceToMove().getPiece().getClass().equals(Rook.class) || this.getPieceToMove().getPiece().getClass().equals(Knight.class) || this.getPieceToMove().getPiece().getClass().equals(Bishop.class) || this.getPieceToMove().getPiece().getClass().equals(Queen.class) || this.getPieceToMove().getPiece().getClass().equals(Bishop.class) || this.getPieceToMove().getPiece().getClass().equals(King.class))
+        else if (this.getPieceToMove().getPiece().getClass().equals(Rook.class))
         {
-            if (board[this.getX_direction()][this.getY_direction()].getPiece() != null && board[this.getX_direction()][this.getY_direction()].getPiece().colour != this.getPlayer().getColour())
-            {
-                int moveChecker = this.getPieceToMove().getPiece().CheckMove(this.getX_direction(), this.getY_direction(), this.getPieceToMove(), board);
-
-                if (moveChecker == 1)
-                {
-                    deadPieceStore.setX_location(this.getX_direction());
-                    deadPieceStore.setY_location(this.getY_direction());
-                    deadPieceStore.setPiece(board[this.getX_direction()][this.getY_direction()].getPiece());
-                    board[this.getX_direction()][this.getY_direction()].setPiece(this.getPieceToMove().getPiece());
-                    board[this.getPieceToMove().getX_location()][this.getPieceToMove().getY_location()].setPiece(null);
-                    opposingFound = true;
-
-                }
-            }
+            opposingFound = piecesKill.killAndTakeRook(board, this.getPieceToMove(), deadPieceStore);
+        }
+        else if (this.getPieceToMove().getPiece().getClass().equals(Knight.class))
+        {
+            opposingFound = piecesKill.killAndTakeKnight(board, this.getPieceToMove(), deadPieceStore);
+        }
+        else if (this.getPieceToMove().getPiece().getClass().equals(Bishop.class))
+        {
+            opposingFound = piecesKill.killAndTakeBishop(board, this.getPieceToMove(), deadPieceStore);
+        }
+        else if (this.getPieceToMove().getPiece().getClass().equals(Queen.class))
+        {
+            opposingFound = piecesKill.killAndTakeQueen(board, this.getPieceToMove(), deadPieceStore);
+        }
+        else if (this.getPieceToMove().getPiece().getClass().equals(King.class))
+        {
+            opposingFound = piecesKill.killAndTakeKing(board, this.getPieceToMove(), deadPieceStore);
         }
         
         return opposingFound;

@@ -27,7 +27,7 @@ public class King extends Piece{
         if (pieceToMove.getPiece().direction == Direction.NORTH)
         {
             
-            if (board[pieceToMove.getX_location()][pieceToMove.getY_location() + 1].getPiece() != null)
+            if (board[pieceToMove.getX_location()][pieceToMove.getY_location() + 1].getPiece() != null && board[pieceToMove.getX_location()][pieceToMove.getY_location() + 1].getPiece().colour == pieceToMove.getPiece().colour)
             {
                 check = 0;
             }
@@ -36,7 +36,7 @@ public class King extends Piece{
         else if (pieceToMove.getPiece().direction == Direction.EAST)
         {
             
-            if (board[pieceToMove.getX_location() + 1][pieceToMove.getY_location()].getPiece() != null)
+            if (board[pieceToMove.getX_location() + 1][pieceToMove.getY_location()].getPiece() != null && board[pieceToMove.getX_location() + 1][pieceToMove.getY_location()].getPiece().colour == pieceToMove.getPiece().colour)
             {
                 check = 0;
             }
@@ -45,7 +45,7 @@ public class King extends Piece{
         else if (pieceToMove.getPiece().direction == Direction.SOUTH)
         {
             
-            if (board[pieceToMove.getX_location()][pieceToMove.getY_location() - 1].getPiece() != null)
+            if (board[pieceToMove.getX_location()][pieceToMove.getY_location() - 1].getPiece() != null && board[pieceToMove.getX_location()][pieceToMove.getY_location() - 1].getPiece().colour == pieceToMove.getPiece().colour)
             {
                 check = 0;
             }
@@ -54,7 +54,7 @@ public class King extends Piece{
         else if (pieceToMove.getPiece().direction == Direction.WEST)
         {
             
-            if (board[pieceToMove.getX_location() - 1][pieceToMove.getY_location()].getPiece() != null)
+            if (board[pieceToMove.getX_location() - 1][pieceToMove.getY_location()].getPiece() != null && board[pieceToMove.getX_location() - 1][pieceToMove.getY_location()].getPiece().colour == pieceToMove.getPiece().colour)
             {
                 check = 0;
             } 
@@ -63,7 +63,7 @@ public class King extends Piece{
         else if (pieceToMove.getPiece().direction == Direction.NORTHEAST)
         {
             
-            if (board[pieceToMove.getX_location() + 1][pieceToMove.getY_location() + 1].getPiece() != null)
+            if (board[pieceToMove.getX_location() + 1][pieceToMove.getY_location() + 1].getPiece() != null && board[pieceToMove.getX_location() + 1][pieceToMove.getY_location() + 1].getPiece().colour == pieceToMove.getPiece().colour)
             {
                 check = 0;
             }
@@ -72,7 +72,7 @@ public class King extends Piece{
         else if (pieceToMove.getPiece().direction == Direction.SOUTHEAST)
         {
             
-            if (board[pieceToMove.getX_location() + 1][pieceToMove.getY_location() - 1].getPiece() != null)
+            if (board[pieceToMove.getX_location() + 1][pieceToMove.getY_location() - 1].getPiece() != null && board[pieceToMove.getX_location() + 1][pieceToMove.getY_location() - 1].getPiece().colour == pieceToMove.getPiece().colour)
             {
                 check = 0;
             }
@@ -81,7 +81,7 @@ public class King extends Piece{
         else if (pieceToMove.getPiece().direction == Direction.SOUTHWEST)
         {
             
-            if (board[pieceToMove.getX_location() - 1][pieceToMove.getY_location() - 1].getPiece() != null)
+            if (board[pieceToMove.getX_location() - 1][pieceToMove.getY_location() - 1].getPiece() != null && board[pieceToMove.getX_location() - 1][pieceToMove.getY_location() - 1].getPiece().colour == pieceToMove.getPiece().colour)
             {
                 check = 0;
             }
@@ -90,7 +90,7 @@ public class King extends Piece{
         else if (pieceToMove.getPiece().direction == Direction.NORTHWEST)
         {
             
-            if (board[pieceToMove.getX_location() - 1][pieceToMove.getY_location() + 1].getPiece() != null)
+            if (board[pieceToMove.getX_location() - 1][pieceToMove.getY_location() + 1].getPiece() != null && board[pieceToMove.getX_location() - 1][pieceToMove.getY_location() + 1].getPiece().colour == pieceToMove.getPiece().colour)
             {
                 check = 0;
             }

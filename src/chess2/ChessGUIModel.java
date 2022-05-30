@@ -5,10 +5,15 @@
 package chess2;
 
 import Model.Cheque;
+import Model.Direction;
+import Model.Piece;
 import Model.Player;
+import Model.PlayerColour;
 import Model.PlayerInput;
 import Model.Square;
 import Model.chequePackage;
+import Model.chessConnection;
+import java.util.HashSet;
 import java.util.Observable;
 
 /**
@@ -26,6 +31,124 @@ public class ChessGUIModel extends Observable{
     private Square destination;
     private Square deadPiece;
     private chequePackage chequePackage;
+    private chessConnection chessConn;
+    private HashSet<Piece> playerPieces;
+    
+    public void instantiateBoard()
+    {
+        this.getChessConn().readPieces(this.getPlayerPieces());
+        
+        for (Piece currentPiece : this.getPlayerPieces())
+        {
+            if (currentPiece.pieceName.contains("Pawn"))
+            {
+                char currentPos = currentPiece.pieceName.charAt(9);
+                int currentPosInt = Integer.valueOf(currentPos) - 48;
+                
+               
+                
+                if (currentPiece.colour.equals(PlayerColour.WHITE))
+                {
+                    this.board[currentPosInt - 1][1].setPiece(currentPiece);
+                }
+                else
+                {
+                    this.board[currentPosInt - 1][6].setPiece(currentPiece);
+                }
+            }
+            else if (currentPiece.pieceName.contains("Rook"))
+            {
+                char currentPos = currentPiece.pieceName.charAt(9);
+                int currentPosInt = Integer.valueOf(currentPos) - 48;
+                
+                if (currentPosInt == 1)
+                {
+                    currentPosInt = 0;
+                }
+                else
+                {
+                    currentPosInt = 7;
+                }
+                
+                if (currentPiece.colour.equals(PlayerColour.WHITE))
+                {
+                    this.board[currentPosInt][0].setPiece(currentPiece);
+                }
+                else
+                {
+                    this.board[currentPosInt][7].setPiece(currentPiece);
+                }
+            }
+            else if (currentPiece.pieceName.contains("Knight"))
+            {
+                char currentPos = currentPiece.pieceName.charAt(11);
+                int currentPosInt = Integer.valueOf(currentPos) - 48;
+                
+                if (currentPosInt == 1)
+                {
+                    currentPosInt = 1;
+                }
+                else
+                {
+                    currentPosInt = 6;
+                }
+                
+                if (currentPiece.colour.equals(PlayerColour.WHITE))
+                {
+                    this.board[currentPosInt][0].setPiece(currentPiece);
+                }
+                else
+                {
+                    this.board[currentPosInt][7].setPiece(currentPiece);
+                }
+            }
+            else if (currentPiece.pieceName.contains("Bishop"))
+            {
+                char currentPos = currentPiece.pieceName.charAt(11);
+                int currentPosInt = Integer.valueOf(currentPos) - 48;
+                
+                if (currentPosInt == 1)
+                {
+                    currentPosInt = 2;
+                }
+                else
+                {
+                    currentPosInt = 5;
+                }
+                
+                if (currentPiece.colour.equals(PlayerColour.WHITE))
+                {
+                    this.board[currentPosInt][0].setPiece(currentPiece);
+                }
+                else
+                {
+                    this.board[currentPosInt][7].setPiece(currentPiece);
+                }
+            }
+            else if (currentPiece.pieceName.contains("Queen"))
+            {
+                if (currentPiece.colour.equals(PlayerColour.WHITE))
+                {
+                    this.board[3][0].setPiece(currentPiece);
+                }
+                else
+                {
+                    this.board[3][7].setPiece(currentPiece);
+                }
+            }
+            else if (currentPiece.pieceName.contains("King"))
+            {
+                if (currentPiece.colour.equals(PlayerColour.WHITE))
+                {
+                    this.board[4][0].setPiece(currentPiece);
+                }
+                else
+                {
+                    this.board[4][7].setPiece(currentPiece);
+                }
+            }
+        }
+    }
     
     public void instantiatePlayer(Player player)
     {
@@ -293,5 +416,33 @@ public class ChessGUIModel extends Observable{
      */
     public void setChequePackage(chequePackage chequePackage) {
         this.chequePackage = chequePackage;
+    }
+
+    /**
+     * @return the chessConn
+     */
+    public chessConnection getChessConn() {
+        return chessConn;
+    }
+
+    /**
+     * @param chessConn the chessConn to set
+     */
+    public void setChessConn(chessConnection chessConn) {
+        this.chessConn = chessConn;
+    }
+
+    /**
+     * @return the playerPieces
+     */
+    public HashSet<Piece> getPlayerPieces() {
+        return playerPieces;
+    }
+
+    /**
+     * @param playerPieces the playerPieces to set
+     */
+    public void setPlayerPieces(HashSet<Piece> playerPieces) {
+        this.playerPieces = playerPieces;
     }
 }

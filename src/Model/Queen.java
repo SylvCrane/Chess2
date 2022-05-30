@@ -26,7 +26,7 @@ public class Queen extends Piece{
         
         if (pieceToMove.getPiece().direction == Direction.NORTH)
         {
-            for (int i = 0; i < y_direction; i++)
+            for (int i = 1; i < y_direction; i++)
             {
                 if (board[pieceToMove.getX_location()][pieceToMove.getY_location() + i].getPiece() != null)
                 {
@@ -36,7 +36,7 @@ public class Queen extends Piece{
         }
         else if (pieceToMove.getPiece().direction == Direction.EAST)
         {
-            for (int i = 0; i < x_direction; i++)
+            for (int i = 1; i < x_direction; i++)
             {
                 if (board[pieceToMove.getX_location() + i][pieceToMove.getY_location()].getPiece() != null)
                 {
@@ -46,7 +46,7 @@ public class Queen extends Piece{
         }
         else if (pieceToMove.getPiece().direction == Direction.SOUTH)
         {
-            for (int i = 0; i < (8 - y_direction); i++)
+            for (int i = 1; i < (y_direction - i); i++)
             {
                 if (board[pieceToMove.getX_location()][pieceToMove.getY_location() - i].getPiece() != null)
                 {
@@ -56,7 +56,7 @@ public class Queen extends Piece{
         }
         else if (pieceToMove.getPiece().direction == Direction.WEST)
         {
-            for (int i = 0; i < (8 - x_direction); i++)
+            for (int i = 1; i < (x_direction); i++)
             {
                 if (board[pieceToMove.getX_location() - i][pieceToMove.getY_location()].getPiece() != null)
                 {
@@ -66,7 +66,7 @@ public class Queen extends Piece{
         }
         else if (pieceToMove.getPiece().direction == Direction.NORTHEAST)
         {
-            for (int i = 0; i < x_direction; i++)
+            for (int i = 1; i < x_direction; i++)
             {
                 if (board[pieceToMove.getX_location() + i][pieceToMove.getY_location() + i].getPiece() != null)
                 {
@@ -76,7 +76,7 @@ public class Queen extends Piece{
         }
         else if (pieceToMove.getPiece().direction == Direction.SOUTHEAST)
         {
-            for (int i = 0; i < x_direction; i++)
+            for (int i = 1; i < x_direction; i++)
             {
                 if (board[pieceToMove.getX_location() + i][pieceToMove.getY_location() - i].getPiece() != null)
                 {
@@ -86,7 +86,7 @@ public class Queen extends Piece{
         }
         else if (pieceToMove.getPiece().direction == Direction.SOUTHWEST)
         {
-            for (int i = 0; i < (8 - x_direction); i++)
+            for (int i = 1; i < (x_direction); i++)
             {
                 if (board[pieceToMove.getX_location() - i][pieceToMove.getY_location() - i].getPiece() != null)
                 {
@@ -96,7 +96,7 @@ public class Queen extends Piece{
         }
         else if (pieceToMove.getPiece().direction == Direction.NORTHWEST)
         {
-            for (int i = 0; i < (8 - x_direction); i++)
+            for (int i = 1; i < (x_direction); i++)
             {
                 if (board[pieceToMove.getX_location() - i][pieceToMove.getY_location() + i].getPiece() != null)
                 {

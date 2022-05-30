@@ -4,7 +4,6 @@
  */
 package Model;
 
-import com.sun.istack.internal.logging.Logger;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
@@ -40,18 +39,18 @@ public class chessConnection
             conn = DriverManager.getConnection(url, dbusername, dbpassword);
             Statement statement = conn.createStatement();
             
-            String table = "userData";
+            String table = "USERDATA";
             
             if (!checkTableExisting(table))
             {
-                statement.executeUpdate("CREATE TABLE "  + table + " (Name VARCHAR(20), score INT)");
+                statement.executeUpdate("CREATE TABLE "  + table + " (NAME VARCHAR(20), SCORE INT)");
             }
    
-            table = "playerPieces";
+            table = "PLAYERPIECES";
             
             if (!checkTableExisting(table))
             {
-                statement.executeUpdate("CREATE TABLE "  + table + " (pieceName VARCHAR(20), colour VARCHAR(5), potentialMoves INT)");
+                statement.executeUpdate("CREATE TABLE "  + table + " (PIECENAME VARCHAR(20), COLOUR VARCHAR(5), POTENTIALMOVES INT)");
             }
 
         }
@@ -66,50 +65,61 @@ public class chessConnection
     {
         int count = 0;
         
-        Statement statement = conn.createStatement();
-        ResultSet rowCounter = statement.executeQuery("SELECT pieceName, colour, potentialMoves FROM playerPieces");
-        if (rowCounter.next())
+        try
         {
-            count++;
+            Statement statement = conn.createStatement();
+            ResultSet rowCounter = statement.executeQuery("SELECT PIECENAME, COLOUR, POTENTIALMOVES FROM PLAYERPIECES");
+            if (rowCounter.next())
+            {
+                count++;
+            }
+
+            if (count == 0)
+            {
+                statement.addBatch("INSERT INTO PLAYERPIECES VALUES ('whiteRook1', 'white', 8),\n"
+                        + "('whiteKnight1', 'white', 0),\n"
+                        + "('whiteBishop1', 'white', 8),\n"
+                        + "('whiteQueen', 'white', 8),\n"
+                        + "('whiteKing', 'white', 1),\n"
+                        + "('whiteBishop2', 'white', 8),\n"
+                        + "('whiteKnight2', 'white', 0),\n"
+                        + "('whiteRook2', 'white', 2),\n"
+                        + "('whitePawn1', 'white', 2),\n"
+                        + "('whitePawn2', 'white', 2),\n"
+                        + "('whitePawn3', 'white', 2),\n"
+                        + "('whitePawn4', 'white', 2),\n"
+                        + "('whitePawn5', 'white', 2),\n"
+                        + "('whitePawn6', 'white', 2),\n"
+                        + "('whitePawn7', 'white', 2),\n"
+                        + "('whitePawn8', 'white', 2),\n"
+                        + "('blackPawn1', 'black', 2),\n"
+                        + "('blackPawn2', 'black', 2),\n"
+                        + "('blackPawn3', 'black', 2),\n"
+                        + "('blackPawn4', 'black', 2),\n"
+                        + "('blackPawn5', 'black', 2),\n"
+                        + "('blackPawn6', 'black', 2),\n"
+                        + "('blackPawn7', 'black', 2),\n"
+                        + "('blackPawn8', 'black', 2),\n"
+                        + "('blackRook1', 'black', 8),\n"
+                        + "('blackKnight1', 'black', 0),\n"
+                        + "('blackBishop1', 'black', 8),\n"
+                        + "('blackQueen', 'black', 8),\n"
+                        + "('blackKing', 'black', 1),\n"
+                        + "('blackBishop2', 'black', 8),\n"
+                        + "('blackKnight2', 'black', 0),\n"
+                        + "('blackRook2', 'black', 8)");
+
+                statement.executeBatch();
+            }
         }
+        catch (SQLException e)
+        {
+            SQLException nextException = e.getNextException();
+            System.out.println(nextException);
+        }
+                
         
-        if (count == 0)
-        {
-            statement.addBatch("INSERT INTO playerPieces VALUES ('whiteRook1', 'white', 8),\n"
-                    + "('whiteKnight1', 'white', 0),\n"
-                    + "('whiteBishop1', 'white', 8),\n"
-                    + "('whiteQueen', 'white', 8),\n"
-                    + "('whiteKing', 'white', 1),\n"
-                    + "('whiteBishop2', 'white', 8),\n"
-                    + "('whiteKnight2', 'white', 0),\n"
-                    + "('whiteRook2', 'white', 2),\n"
-                    + "('whitePawn1', 'white', 2),\n"
-                    + "('whitePawn2', 'white', 2),\n"
-                    + "('whitePawn3', 'white', 2),\n"
-                    + "('whitePawn4', 'white', 2),\n"
-                    + "('whitePawn5', 'white', 2),\n"
-                    + "('whitePawn6', 'white', 2),\n"
-                    + "('whitePawn7', 'white', 2),\n"
-                    + "('whitePawn8', 'white', 2),\n"
-                    + "('blackPawn1', 'black', 2),\n"
-                    + "('blackPawn2', 'black', 2),\n"
-                    + "('blackPawn3', 'black', 2),\n"
-                    + "('blackPawn4', 'black', 2),\n"
-                    + "('blackPawn5', 'black', 2),\n"
-                    + "('blackPawn6', 'black', 2),\n"
-                    + "('blackPawn7', 'black', 2),\n"
-                    + "('blackPawn8', 'black', 2),\n"
-                    + "('blackRook1', 'black', 8),\n"
-                    + "('blackKnight1', 'black', 0),\n"
-                    + "('blackBishop1', 'black', 8),\n"
-                    + "('blackQueen', 'black', 8),\n"
-                    + "('blackKing', 'black', 1),\n"
-                    + "('blackBishop2', 'black', 8),\n"
-                    + "('blackKnight2', 'black', 0),\n"
-                    + "('blackRook2', 'black', 8),\n");
-            
-            statement.executeBatch();
-        }
+        
     }
     
     public Player nameChecker(String username) throws SQLException
@@ -121,7 +131,7 @@ public class chessConnection
         try
         {
             Statement statement = conn.createStatement();      
-            ResultSet rs = statement.executeQuery("SELECT Name, score FROM userData WHERE Name = '" + username + "'");
+            ResultSet rs = statement.executeQuery("SELECT NAME, SCORE FROM USERDATA WHERE NAME = '" + username + "'");
             
             if (rs.next())
             {
@@ -151,13 +161,13 @@ public class chessConnection
         try
         {
             Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT pieceName, colour, potentialMoves FROM playerPieces");
+            ResultSet rs = statement.executeQuery("SELECT PIECENAME, COLOUR, POTENTIALMOVES FROM PLAYERPIECES");
             
-            if (rs.next())
+            while (rs.next())
             {
-                this.pieceName = rs.getString("pieceName");
-                this.pieceColour = rs.getString("colour");
-                this.potentialMoves = rs.getInt("potentialMoves");
+                this.pieceName = rs.getString("PIECENAME");
+                this.pieceColour = rs.getString("COLOUR");
+                this.potentialMoves = rs.getInt("POTENTIALMOVES");
                 
                 if (this.pieceName.contains("Pawn"))
                 {

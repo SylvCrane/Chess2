@@ -48,6 +48,7 @@ public class ChessGUIView extends JFrame implements Observer{
     private JLabel player1;
     private JLabel player2;
     private JLabel currentPlayer;
+    public boolean pieceMoved = false;
     
     
     public ChessGUIView()
@@ -257,11 +258,11 @@ public class ChessGUIView extends JFrame implements Observer{
                             this.buttonSquares[x][y].add(this.labelPieces[x][y]);
                             break;
                         case 3:
-                            this.labelPieces[x][y] = establishPieces.updateWhiteKing();
+                            this.labelPieces[x][y] = establishPieces.updateWhiteQueen();
                             this.buttonSquares[x][y].add(this.labelPieces[x][y]);
                             break;
                         case 4:
-                            this.labelPieces[x][y] = establishPieces.updateWhiteQueen();
+                            this.labelPieces[x][y] = establishPieces.updateWhiteKing();
                             this.buttonSquares[x][y].add(this.labelPieces[x][y]);
                             break;
                         case 5:
@@ -306,11 +307,11 @@ public class ChessGUIView extends JFrame implements Observer{
                             this.buttonSquares[x][y].add(this.labelPieces[x][y]);
                             break;
                         case 3:
-                            this.labelPieces[x][y] = establishPieces.updateBlackKing();
+                            this.labelPieces[x][y] = establishPieces.updateBlackQueen();
                             this.buttonSquares[x][y].add(this.labelPieces[x][y]);
                             break;
                         case 4:
-                            this.labelPieces[x][y] = establishPieces.updateBlackQueen();
+                            this.labelPieces[x][y] = establishPieces.updateBlackKing();
                             this.buttonSquares[x][y].add(this.labelPieces[x][y]);
                             break;
                         case 5:
@@ -339,6 +340,8 @@ public class ChessGUIView extends JFrame implements Observer{
         
         if (!this.isPieceSelected())
         {
+            
+            
             if ((Square)arg1 == null)
             {
                 JLabel notApplicable = new JLabel();
@@ -352,20 +355,33 @@ public class ChessGUIView extends JFrame implements Observer{
                 Square lightUpSquare = (Square)arg1;
                 this.buttonSquares[lightUpSquare.getX_location()][lightUpSquare.getY_location()].setBackground(Color.GREEN);
                 this.setPieceSelected(true);
+                this.pieceMoved = false;
             }
         }
         else if (!this.isDestinationSelected())
         {
-            if (arg1.getClass() == Square[][].class)
+            if (arg1 == null)
+            {
+                JLabel cannotMoveHere = new JLabel();
+                cannotMoveHere.setText("You cannot move here. Please\n choose another location \nor select another piece");
+                
+                this.currentStatus.setText(cannotMoveHere.getText());
+                this.resetColours();
+                this.setPieceSelected(false);
+            }
+            else if (arg1.getClass() == Square[][].class)
             {
                 if ((Square[][])arg1 == null)
                 {
-                    this.currentStatus.setText("You cannot move here");
+                    this.currentStatus.setText("You cannot move here. Please choose \nanother location or select another piece");
+                    this.resetColours();
+                    this.setPieceSelected(false);
                 }
                 else if ((Square[][])arg1 != null)
                 {
-                    this.updateBoard((Square[][])arg1);
+                    this.pieceMoved = true;
                     this.resetColours();
+                    this.updateBoard((Square[][])arg1);
                     
                 }
             }
@@ -385,6 +401,7 @@ public class ChessGUIView extends JFrame implements Observer{
                     this.currentStatus.setText(this.player1.getText() + ", it is now your turn");
                     this.currentPlayer.setText(this.player1.getText());
                     }
+                    
                     
                     this.setPieceSelected(false);
                 }
