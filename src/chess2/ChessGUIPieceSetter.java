@@ -14,6 +14,9 @@ import javax.swing.JLabel;
  */
 public class ChessGUIPieceSetter {
     
+    //This class is used by the GUI view to update the board with images of the pieces used on the board,
+    //separated by their type and the color of the piece.
+    
     private Image img;
     private ImageIcon imgico;
     
@@ -22,6 +25,8 @@ public class ChessGUIPieceSetter {
         this.img = null;
         this.imgico = null;
     }
+    
+    //Because the only difference in each method is the image itself, they are virtually the same.
     
     public JLabel updateWhiteRook()
     {

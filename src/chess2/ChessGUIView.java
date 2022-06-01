@@ -4,6 +4,7 @@
  */
 package chess2;
 
+import Model.Player;
 import Model.Square;
 import Model.chequePackage;
 import java.awt.BorderLayout;
@@ -22,6 +23,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 /**
  *
@@ -34,6 +36,7 @@ public class ChessGUIView extends JFrame implements Observer{
     private JPanel chessInformation;
     private JTextArea currentStatus;
     private JButton quitButton;
+    private JButton rulesButton;
     private JPanel gameState;
     private JPanel spaceMaker;
     private JLabel[][] labelPieces = new JLabel[8][8];
@@ -49,42 +52,71 @@ public class ChessGUIView extends JFrame implements Observer{
     private JLabel player2;
     private JLabel currentPlayer;
     public boolean pieceMoved = false;
+    private JPanel startingPanel;
     
     
-    public ChessGUIView()
+    /**
+     * This is the first panel the user will see. From here, the player sets player1 and player2 for the game.
+     * 
+     */
+    public void gameStart()
     {
+        this.getContentPane().removeAll();
         displayChessInformation();
         instantiateChessBoard();
         setStartingImages();
         
+        this.startingPanel = new JPanel();
+        this.startingPanel.setLayout(new BorderLayout());
+        
         this.chessTitle = new JPanel();
         this.title = new JLabel("CHESS");
-        this.title.setFont(new Font("Arial", Font.BOLD, 50));
+        this.title.setFont(new Font("Arial", Font.BOLD, 100));
         this.chessTitle.add(this.title);
-        this.add(this.chessTitle, BorderLayout.CENTER);
+        
+        this.startingPanel.add(this.chessTitle, BorderLayout.NORTH);
         
         this.nameField = new JPanel();
        
         this.player1Field = new JTextField(20);
-        this.player1Field.setText("Navjot");
+        this.player1Field.setText("Player 1");
         this.player2Field = new JTextField(20);
-        this.player2Field.setText("Dylan");
+        this.player2Field.setText("Player 2");
         this.nameAccept = new JButton("Enter");
         
         this.nameField.add(this.player1Field);
         this.nameField.add(this.player2Field);
         this.nameField.add(this.nameAccept);
         
-        this.add(this.nameField, BorderLayout.SOUTH);
+        this.startingPanel.add(this.nameField, BorderLayout.SOUTH);
+        
+        JLabel startingMessage = new JLabel();
+        startingMessage.setVerticalAlignment(SwingConstants.CENTER);
+        startingMessage.setHorizontalAlignment(SwingConstants.CENTER);
+        startingMessage.setFont(new Font("Arial", Font.BOLD, 15));
+        startingMessage.setText("<html>Welcome to Chess. <br/>Please input the names of player 1 and 2 (white and black respectively)<br/> and press enter to begin. If you are a returning player, your data will be recorded appropriately.<html>");
+        this.startingPanel.add(startingMessage, BorderLayout.CENTER);
         
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setBounds(100, 100, 850, 660);
+        this.add(this.startingPanel);
+        this.revalidate();
+        this.repaint();
     }
     
+    
+    public ChessGUIView()
+    {
+        this.gameStart();
+    }
+    
+    /**
+     * This is the game itself, including the game board, and game data on the side, with buttons and the JTextArea.
+     * 
+     */
     public void mainGame()
     {  
-        this.remove(this.chessTitle);
-        this.remove(this.nameField);
+        this.remove(this.startingPanel);
         this.currentPlayer = new JLabel();
         this.currentPlayer.setText(this.player1.getText());
         this.currentStatus.setText(this.currentPlayer.getText() + ", it is now your turn");
@@ -99,6 +131,11 @@ public class ChessGUIView extends JFrame implements Observer{
         this.repaint();
     }
     
+    /**
+     * This is a JPanel with a grid layout consisting of everything that is not the game board itself.
+     * This includes the JTextArea, the rules button and the reset button.
+     * 
+     */
     public void displayChessInformation()
     {
         this.chessInformation = new JPanel();
@@ -108,14 +145,22 @@ public class ChessGUIView extends JFrame implements Observer{
         this.chessInformation.setLayout(informationRow);
         
         this.currentStatus = new JTextArea();
-        this.spaceMaker = new JPanel();
-        this.quitButton = new JButton("quit");
+        this.rulesButton = new JButton("Rules");
+        this.quitButton = new JButton("reset");
         
         this.chessInformation.add(this.currentStatus);
-        this.chessInformation.add(this.spaceMaker);
+        this.chessInformation.add(this.rulesButton);
         this.chessInformation.add(this.quitButton);
     }
     
+    /**
+     * This sets the names of each of the buttons. The name is a combination of the xLocation
+     * and yLocation of the piece.
+     * 
+     * @param x
+     * @param y
+     * @return 
+     */
     public String setButtonName(int x, int y)
     {
         StringBuilder buttonName = new StringBuilder();
@@ -129,6 +174,11 @@ public class ChessGUIView extends JFrame implements Observer{
         return buttonName.toString();
     }
   
+    /**
+     * This sets each of the buttons on the board through a grid layout. It is going in the opposite 
+     * direction due to how a gridLayout functions. The button name is set here.
+     * 
+     */
     public void instantiateChessBoard()
     {
         this.chessBoard = new JPanel();
@@ -136,6 +186,7 @@ public class ChessGUIView extends JFrame implements Observer{
         GridLayout chessGrid = new GridLayout(8, 8);
         this.chessBoard.setLayout(chessGrid);
 
+        //opposite order, to account for how a grid layout works.
         for (int y = 7; y > -1; y--)
         {
             for (int x = 0; x < 8; x++)
@@ -179,6 +230,39 @@ public class ChessGUIView extends JFrame implements Observer{
             } 
     }
     
+    /**
+     * This is the final panel the player sees if either player has gotten a checkmate. It will print the player's
+     * new score.
+     * 
+     * @param winnerAndLoser 
+     */
+    public void gameEnd(Player[] winnerAndLoser)
+    {
+        JPanel gameEndPanel = new JPanel();
+        JLabel gamePlayerData = new JLabel();
+        
+        if (winnerAndLoser[0].isInCheque())
+        {
+            gamePlayerData.setText("Well done, " + winnerAndLoser[1].getName() +". Your score has increased to " + winnerAndLoser[1].getScore() + "\n Sorry, " + winnerAndLoser[0].getName() + ", your score has decreased to " + winnerAndLoser[0].getScore());
+        }
+        else
+        {
+            gamePlayerData.setText("Well done, " + winnerAndLoser[0].getName() +". Your score has increased to " + winnerAndLoser[0].getScore() + "\n Sorry, " + winnerAndLoser[1].getName() + ", your score has decreased to " + winnerAndLoser[1].getScore());
+        }
+        
+        gameEndPanel.add(gamePlayerData);
+        
+        this.getContentPane().removeAll();
+        this.add(gameEndPanel);
+        this.revalidate();
+        this.repaint();
+    }
+    
+    /**
+     * This method sets the color of the buttons depending on their position on the board. It is important
+     * for the colors to mimic that of a traditional chess board.
+     * 
+     */
     public void resetColours()
     {
         for (int y = 7; y > -1; y--)
@@ -211,6 +295,12 @@ public class ChessGUIView extends JFrame implements Observer{
         }
     }
     
+    /**
+     * This adds the functionality for the controller to the buttons. Because of the nature of the chess board
+     * this needs to be done in a for loop.
+     * 
+     * @param controller 
+     */
     public void addController(ChessGUIController controller) {
         System.out.println("View      : adding controller");
         
@@ -224,8 +314,14 @@ public class ChessGUIView extends JFrame implements Observer{
         
         this.nameAccept.addActionListener(controller);
         this.quitButton.addActionListener(controller);
+        this.rulesButton.addActionListener(controller);
     }
     
+    /**
+     * This sets the opening images to the squares based on the current location of the square. It is the only
+     * use of the switch case as it is appropriate here.
+     * 
+     */
     public void setStartingImages()
     {
         for (int x = 0; x < 8; x++)
@@ -335,17 +431,22 @@ public class ChessGUIView extends JFrame implements Observer{
         }
     }
     
+    /**
+     * This updates the view based on what was manipulated in the controller and what changed in the model.
+     * As a result, it uses several if statements based on what the class of the object is.
+     * 
+     * @param arg0
+     * @param arg1 
+     */
     @Override
     public void update(Observable arg0, Object arg1) {
         
         if (!this.isPieceSelected())
         {
-            
-            
             if ((Square)arg1 == null)
             {
                 JLabel notApplicable = new JLabel();
-                notApplicable.setText("You cannot select a piece at this location");
+                notApplicable.setText("You cannot select a piece at this \nlocation");
                 
                 this.currentStatus.setText(notApplicable.getText());
             }
@@ -381,8 +482,7 @@ public class ChessGUIView extends JFrame implements Observer{
                 {
                     this.pieceMoved = true;
                     this.resetColours();
-                    this.updateBoard((Square[][])arg1);
-                    
+                    this.updateBoard((Square[][])arg1);  
                 }
             }
             else if (arg1.getClass() == chequePackage.class)
@@ -401,14 +501,13 @@ public class ChessGUIView extends JFrame implements Observer{
                     this.currentStatus.setText(this.player1.getText() + ", it is now your turn");
                     this.currentPlayer.setText(this.player1.getText());
                     }
-                    
-                    
+                
                     this.setPieceSelected(false);
                 }
                 else if (chequeView.getChequeBoolean()[0])
                 {
                     this.updateBoard(chequeView.getBoard());
-                    this.currentStatus.setText(this.currentPlayer.getText());
+                    this.currentStatus.setText(this.currentPlayer.getText() + ", you're in cheque");
                     this.setPieceSelected(false);
                 }
                 
@@ -421,6 +520,14 @@ public class ChessGUIView extends JFrame implements Observer{
         }
     }
     
+    
+    /**
+     * This updates the board after every move, regardless of the player is in cheque or not. The latter detail is
+     * important as if the player is in cheque, the view must be immediately changed back to represent
+     * the returned position of the pieces.
+     * 
+     * @param board 
+     */
     public void updateBoard(Square[][] board)
     {
         ChessGUIPieceSetter updatePieces = new ChessGUIPieceSetter();

@@ -10,13 +10,18 @@ package Model;
  */
 public class chequePackage {
     
+    //This class stores information to pass to the GUI of the program. Specifically, the board, cheque booleans and the players.
+    //The booleans have an order. The first [0] is for a simple cheque. The second [1] is used for checkmate.
+    
     private Square[][] board;
     private boolean[] chequeBoolean;
+    private Player[] winnerAndLoser;
     
-    public chequePackage(Square[][] board, boolean[] chequeBoolean)
+    public chequePackage(Square[][] board, boolean[] chequeBoolean, Player[] winnerAndLoser)
     {
-        board = this.board;
-        chequeBoolean = this.chequeBoolean;
+        this.board = board;
+        this.chequeBoolean = chequeBoolean;
+        this.winnerAndLoser = winnerAndLoser;
     }
 
     /**
@@ -45,6 +50,20 @@ public class chequePackage {
      */
     public void setChequeBoolean(boolean[] chequeBoolean) {
         this.chequeBoolean = chequeBoolean;
+    }
+
+    /**
+     * @return the winnerAndLoser
+     */
+    public Player[] getWinnerAndLoser() {
+        return winnerAndLoser;
+    }
+
+    /**
+     * @param winnerAndLoser the winnerAndLoser to set
+     */
+    public void setWinnerAndLoser(Player[] winnerAndLoser) {
+        this.winnerAndLoser = winnerAndLoser;
     }
     
     

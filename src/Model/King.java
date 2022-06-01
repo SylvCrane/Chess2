@@ -103,8 +103,11 @@ public class King extends Piece{
     @Override
     public void MakeMove(int x_direction, int y_direction, Square pieceToMove, Square[][] board) 
     {
+        int xOrigin = pieceToMove.getX_location();
+        int yOrigin = pieceToMove.getY_location();
+        
         board[x_direction][y_direction].setPiece(pieceToMove.getPiece());
-        board[pieceToMove.getX_location()][pieceToMove.getY_location()].setPiece(null);
+        board[xOrigin][yOrigin].setPiece(null);
        
     }
      

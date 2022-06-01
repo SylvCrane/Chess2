@@ -20,7 +20,7 @@ import java.util.HashSet;
 public class Chess2 {
 
     /**
-     * @param args the command line arguments
+     * @param args the command line argumentsZ
      */
     public static void main(String[] args) throws IOException, SQLException {
         Chess2 chess = new Chess2();
@@ -28,16 +28,14 @@ public class Chess2 {
     
     public Chess2() throws IOException, SQLException
     {
-         ChessGUIView view = new ChessGUIView();
+        ChessGUIView view = new ChessGUIView();
         view.setVisible(true);
         
         chessConnection connection = new chessConnection();
         connection.chessSetup();
         
         ChessGUIModel model = new ChessGUIModel();
-        model.setPlayer1(new Player("Navjot", PlayerColour.WHITE, 0));
-        model.setPlayer2(new Player("Dylan", PlayerColour.BLACK, 0));
-        model.newPlayerTurn();
+        
         model.addObserver(view);
         model.setChessConn(connection);
         model.getChessConn().writePieces();
@@ -56,7 +54,7 @@ public class Chess2 {
         controller.addView(view);
         view.addController(controller);
         controller.addModel(model);
-        
+         
         
     }
     

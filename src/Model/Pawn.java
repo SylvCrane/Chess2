@@ -11,9 +11,7 @@ public class Pawn extends Piece{
         this.direction = Direction.STILL;
     }
     /*
-    The following method will check if the move can be made. Mainly, it is checking if there is another piece in the position
-    that the pawn now wants to move to. If there is, the pawn will not move to this position (In chess rules, the pawn
-    cannot attack from the front).
+    The following method will check if the move can be made. It does not check if there is an opposing piece as this was already done.
     */
     @Override
     public int CheckMove(int x_direction, int y_direction, Square pieceToMove, Square[][] board)
@@ -44,16 +42,22 @@ public class Pawn extends Piece{
     {
         if (pieceToMove.getPiece().colour == PlayerColour.WHITE)
         {
+            int xOrigin = pieceToMove.getX_location();
+            int yOrigin = pieceToMove.getY_location();
+        
             board[x_direction][y_direction].setPiece(pieceToMove.getPiece());
-            board[pieceToMove.getX_location()][pieceToMove.getY_location()].setPiece(null); 
+            board[xOrigin][yOrigin].setPiece(null);
             
             //It is important that the original position is set to null as, otherwise, the board would be filled with duplicate pieces.
               
         }
         else if (pieceToMove.getPiece().colour == PlayerColour.BLACK)
         {
+            int xOrigin = pieceToMove.getX_location();
+            int yOrigin = pieceToMove.getY_location();
+        
             board[x_direction][y_direction].setPiece(pieceToMove.getPiece());
-            board[pieceToMove.getX_location()][pieceToMove.getY_location()].setPiece(null);
+            board[xOrigin][yOrigin].setPiece(null);
         }
         
         if (board[x_direction][y_direction].getPiece().potential_moves == 2)

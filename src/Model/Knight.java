@@ -19,6 +19,15 @@ public class Knight extends Piece{
         this.direction = Direction.STILL;
     }
     
+    /**
+     * Like with the king, this method is unique in that it checks only the destination as knights do not move cardinally.
+     * 
+     * @param x_direction
+     * @param y_direction
+     * @param pieceToMove
+     * @param board
+     * @return 
+     */
     @Override
     public int CheckMove(int x_direction, int y_direction, Square pieceToMove, Square[][] board) 
     {
@@ -92,8 +101,11 @@ public class Knight extends Piece{
     @Override
     public void MakeMove(int x_direction, int y_direction, Square pieceToMove, Square[][] board) 
     { 
+        int xOrigin = pieceToMove.getX_location();
+        int yOrigin = pieceToMove.getY_location();
+        
         board[x_direction][y_direction].setPiece(pieceToMove.getPiece());
-        board[pieceToMove.getX_location()][pieceToMove.getY_location()].setPiece(null);
+        board[xOrigin][yOrigin].setPiece(null);
         
     }
      

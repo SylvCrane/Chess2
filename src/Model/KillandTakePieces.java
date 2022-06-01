@@ -10,6 +10,8 @@ package Model;
  */
 public class KillandTakePieces {
     
+    //This class involves the individual killing and taking of pieces depending on the piece
+    
     private int xDirection;
     private int yDirection;
     
@@ -19,6 +21,15 @@ public class KillandTakePieces {
         this.yDirection = y;
     }
     
+    
+    /**
+     * This method involves if the current piece, a pawn, is capable of attacking, done by detecting if there is an opposing piece in each diagonal direction.
+     * 
+     * @param board
+     * @param pieceToMove
+     * @param deadPieceStore
+     * @return 
+     */
     public boolean killAndTakePawn(Square[][] board, Square pieceToMove, Square deadPieceStore)
     {
         boolean opposingFound = false;
@@ -69,6 +80,16 @@ public class KillandTakePieces {
         return opposingFound;
     }
     
+    
+    
+    /**
+     * The following method is used in the case of the current piece, a rook, wanting to attack the opposing piece in its destination. To do this, it checks each position up to but not including the destination piece.
+     * 
+     * @param board
+     * @param pieceToMove
+     * @param deadPieceStore
+     * @return 
+     */
     public boolean killAndTakeRook(Square[][] board, Square pieceToMove, Square deadPieceStore)
     {
         boolean opposingFound = false;
@@ -132,6 +153,9 @@ public class KillandTakePieces {
         
         return opposingFound;
     }
+    
+    //Because the following methods identify killing and taking but for subsequent pieces, it is redundant to repeat information.
+    //However, in the case of both the knight and the king, these check the destination itself to find an opposing piece. 
     
     public boolean killAndTakeBishop(Square[][] board, Square pieceToMove, Square deadPieceStore)
     {
@@ -336,6 +360,8 @@ public class KillandTakePieces {
         return opposingFound;     
     }
     
+    
+    //A noteworthy observation to make with the king is that it cannot take the opposing player's king as this would prevent the ame from being won.
     public boolean killAndTakeKing(Square[][] board, Square pieceToMove, Square deadPieceStore)
     {
         boolean opposingFound = false;

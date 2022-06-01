@@ -19,7 +19,11 @@ import java.util.HashSet;
  */
 public class chessConnection 
 {
+    //This class establishes a connection with the chess database or connects a new one if it has not been initialized.
+    
     Connection conn = null;
+    
+    //The following string denotes an embedded database, meaning its location is with the program and not dependant on the location of derby.
     String url = "jdbc:derby:chessDB;create=true";
     String dbusername = "pdc";
     String dbpassword = "pdc";
@@ -27,6 +31,7 @@ public class chessConnection
     public String name = null;
     public int score = 0;
     
+    //The following variables are used as temporary stores for writing and reading pieces.
     public String pieceName = null;
     public String pieceColour = null;
     public Direction pieceDirection = Direction.STILL;
@@ -41,6 +46,7 @@ public class chessConnection
             
             String table = "USERDATA";
             
+            //Of course, if the tables do not exist, tehy must be created.
             if (!checkTableExisting(table))
             {
                 statement.executeUpdate("CREATE TABLE "  + table + " (NAME VARCHAR(20), SCORE INT)");
@@ -61,6 +67,11 @@ public class chessConnection
     }
 
  
+    /**
+     * This method writes the pieces to the playerPieces table, but only if they do not exist beforehand.
+     * 
+     * @throws SQLException 
+     */
     public void writePieces() throws SQLException
     {
         int count = 0;
@@ -74,6 +85,8 @@ public class chessConnection
                 count++;
             }
 
+            
+            //Storing the pieces using a batch as this is significantly more convenient.
             if (count == 0)
             {
                 statement.addBatch("INSERT INTO PLAYERPIECES VALUES ('whiteRook1', 'white', 8),\n"
@@ -116,31 +129,62 @@ public class chessConnection
         {
             SQLException nextException = e.getNextException();
             System.out.println(nextException);
-        }
-                
+        } 
+    }
+    
+    /**
+     * This method writes the scores of the player to the userData table in the case that the game had been won
+     * 
+     * @param player
+     * @throws SQLException 
+     */
+    public void writeScores(Player player) throws SQLException
+    {
+        boolean nameCheck = this.nameChecker(player);
         
+        Statement statement = conn.createStatement();
+        
+        if (nameCheck)
+        {
+            String scoreUpdater = "UPDATE USERDATA SET SCORE=" + player.getScore() +" WHERE NAME = "+ player.getName();
+            statement.executeUpdate(scoreUpdater);
+        }
+        else
+        {
+            String scoreUpdater = "INSERT INTO USERDATA VALUES(" + player.getName() +", " + player.getScore() + ")";
+            statement.executeUpdate(scoreUpdater);
+        }
         
     }
     
-    public Player nameChecker(String username) throws SQLException
+    /**
+     * This checks if the player is present in the database already. If this is the case, their score is registered as the player's current score.
+     * 
+     * @param player
+     * @return
+     * @throws SQLException 
+     */
+    public boolean nameChecker(Player player) throws SQLException
     {
         boolean nameChecker = false;
-        Player playerIfFound = null;
-
-        
+       
         try
         {
             Statement statement = conn.createStatement();      
-            ResultSet rs = statement.executeQuery("SELECT NAME, SCORE FROM USERDATA WHERE NAME = '" + username + "'");
+            ResultSet rs = statement.executeQuery("SELECT NAME, SCORE FROM USERDATA WHERE NAME = '" + player.getName() + "'");
             
-            if (rs.next())
+            while (rs.next())
             {
-                String currentName = rs.getString("Name");
-                if (username.compareTo(currentName) == 0)
+                String currentName = rs.getString("NAME");
+                if (player.getName().compareTo(currentName) == 0)
                 {
                     nameChecker = true;
-                    playerIfFound.setName(username);
-                    playerIfFound.setScore(rs.getInt("score"));
+                    player.setScore(rs.getInt("SCORE"));
+                    break;
+                }
+                else
+                {
+                    player.setScore(0);
                 }
             }
         }
@@ -149,10 +193,11 @@ public class chessConnection
             
         }
         
-        return playerIfFound;
+        return nameChecker;
     }
     
     /**
+     * This reads the player pieces from the playerPieces database and sets them into a hashSet.
      *
      * @param PlayerPieces
      */
@@ -244,6 +289,12 @@ public class chessConnection
         }
     }
     
+    /**
+     * This method checks if the table exists in the database already to avoid a potential SQL error for overwriting a database.
+     * 
+     * @param newTableName
+     * @return 
+     */
     public boolean checkTableExisting(String newTableName) {
         boolean flag = false;
         

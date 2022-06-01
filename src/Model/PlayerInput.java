@@ -40,48 +40,12 @@ public class PlayerInput {
     }
 
     /**
-     * This prints the direction rules fo the piece selected by the user through their x and y locations.
+     * This method identifies if the piece can be moved by the current player by comparing the colour of the piece to the player's assigned colour.
      * 
-     * @param board: The two-dimensional square array that represents the board.
+     * @param board: The chess board
+     * @param pieceToMove: The current piece that needs to be moved.
+     * @return 
      */
-    public String directionPrint (Square[][] board)
-    {
-        String directionString = "";
-        
-        if (board[this.getX_direction()][this.getY_direction()].getPiece().getClass().equals(Pawn.class))
-        {
-            directionString = "You can move this piece forward\nand diagonally to the left or right.\nIt can only move diagonally if there\nis an enemy piece in this location.";
-            
-        }
-        else if (board[this.getX_direction()][this.getY_direction()].getPiece().getClass().equals(Rook.class))
-        {
-            directionString = "You can move this piece) \nnorth \neast \nsouth \nwest.";
-           
-        }
-        else if (board[this.getX_direction()][this.getY_direction()].getPiece().getClass().equals(Knight.class))
-        {
-            directionString = "This piece moves in an L-Shape in the following directions: \nNorth North East \nNorth East East \nSouth East East \nSouth South East\nSouth South West\nSouth West West\nNorth West West\nNorth North West";
-           
-        }
-        else if (board[this.getX_direction()][this.getY_direction()].getPiece().getClass().equals(Bishop.class))
-        {
-            directionString = "You can move this piece in the following directions\nNorth East \nSouth East \nSouth West \nNorth West ";
-            
-        }
-        else if (board[this.getX_direction()][this.getY_direction()].getPiece().getClass().equals(Queen.class))
-        {
-            directionString = "This piece moves in the following directions: \nNorth \nNorth East \nEast \nSouth East \nSouth \nSouth West \nWest \nNorth West ";
-            
-        }
-        else if (board[this.getX_direction()][this.getY_direction()].getPiece().getClass().equals(King.class))
-        {
-            directionString = "This piece moves one space in the following directions: \nNorth \nNorth East \nEast \nSouth East \nSouth \nSouth West \nWest \nNorth West ";
-            
-        }
-        
-        return directionString;
-    }
-    
     public boolean appropriatePiece (Square[][] board, Square pieceToMove)
     {
         this.setPieceToMove(pieceToMove);
@@ -99,7 +63,7 @@ public class PlayerInput {
     }
     
     /**
-     * This checks the direction of the piece based on the second set of coordinates inputted by the user. If it is appropriate, it returns a positive boolean. If not, it will return false.
+     * This checks the direction of the piece based on the second chess button selected by the user. If it is appropriate, it returns a positive boolean. If not, it will return false.
      * 
      * @param board
      * @param directionInput
@@ -108,326 +72,81 @@ public class PlayerInput {
     public boolean directionCheck (Square[][] board)
     {
         boolean directionOkay = false;
+        DirectionPieces checkDirection = new DirectionPieces(this.getPieceToMove(), this.getX_direction(), this.getY_direction(), this.getPlayer());
         
         if (board[this.getPieceToMove().getX_location()][this.getPieceToMove().getY_location()].getPiece().getClass().equals(Pawn.class))
         {
-            if (this.getPieceToMove().getPiece().getColour() == PlayerColour.WHITE)
-            {
-                if ((this.getPieceToMove().getX_location() - 1) == (this.getX_direction()) && (this.getPieceToMove().getY_location() + 1) == this.getY_direction())
-                {
-                    if (board[this.getX_direction()][this.getY_direction()].getPiece() != null && board[this.getX_direction()][this.getY_direction()].getPiece().getColour() != this.player.getColour())
-                    {
-                        directionOkay = true;
-                        this.getPieceToMove().getPiece().direction = Direction.NORTHWEST;
-                    }
-                }
-                else if ((this.getPieceToMove().getX_location() + 1) == (this.getX_direction()) && (this.getPieceToMove().getY_location() + 1) == this.getY_direction())
-                {
-                    if (board[this.getX_direction()][this.getY_direction()].getPiece() != null && board[this.getX_direction()][this.getY_direction()].getPiece().getColour() != this.player.getColour())
-                    {
-                        directionOkay = true;
-                        this.getPieceToMove().getPiece().direction = Direction.NORTHEAST;
-                    }
-                }
-                else if ((this.getPieceToMove().getY_location() + 1) == this.getY_direction() && (this.getPieceToMove().getX_location() == this.getX_direction()))
-                {
-                    directionOkay = true;
-                    this.getPieceToMove().getPiece().direction = Direction.NORTH;
-                }
-                else if ((this.getPieceToMove().getY_location() + 2) == this.getY_direction() && (this.getPieceToMove().getX_location() == this.getX_direction()))
-                {
-                    directionOkay = true;
-                    this.getPieceToMove().getPiece().direction = Direction.NORTH;
-                }
-            }
-            else if (this.getPieceToMove().getPiece().getColour() == PlayerColour.BLACK)
-            {
-                if ((this.getPieceToMove().getX_location() - 1) == (this.getX_direction()) && (this.getPieceToMove().getY_location() - 1) == this.getY_direction())
-                {
-                    if (board[this.getX_direction()][this.getY_direction()].getPiece() != null && board[this.getX_direction()][this.getY_direction()].getPiece().getColour() != this.player.getColour())
-                    {
-                        directionOkay = true;
-                        this.getPieceToMove().getPiece().direction = Direction.SOUTHWEST;
-                    }
-                }
-                else if ((this.getPieceToMove().getX_location() + 1) == (this.getX_direction()) && (this.getPieceToMove().getY_location() - 1) == this.getY_direction())
-                {
-                    if (board[this.getX_direction()][this.getY_direction()].getPiece() != null && board[this.getX_direction()][this.getY_direction()].getPiece().getColour() != this.player.getColour())
-                    {
-                        directionOkay = true;
-                        this.getPieceToMove().getPiece().direction = Direction.SOUTHEAST;
-                    }
-                }
-                else if ((this.getPieceToMove().getY_location() - 1) == this.getY_direction() && (this.getPieceToMove().getX_location() == this.getX_direction()))
-                {
-                    directionOkay = true;
-                    this.getPieceToMove().getPiece().direction = Direction.NORTH;
-                }
-                else if ((this.getPieceToMove().getY_location() - 2) == this.getY_direction() && (this.getPieceToMove().getX_location() == this.getX_direction()))
-                {
-                    directionOkay = true;
-                    this.getPieceToMove().getPiece().direction = Direction.NORTH;
-                }
-            }
+            directionOkay = checkDirection.directionPawn(board);
         }
         else if (board[this.getPieceToMove().getX_location()][this.getPieceToMove().getY_location()].getPiece().getClass().equals(Rook.class))
         {
-            if ((this.getPieceToMove().getX_location() > this.getX_direction()) || (this.getPieceToMove().getX_location() < this.getX_direction()))
-            {
-                if (this.getY_direction() == this.getPieceToMove().getY_location())
-                {
-                    directionOkay = true;
-                    
-                    if (this.getPieceToMove().getX_location() > this.getX_direction())
-                    {
-                        this.getPieceToMove().getPiece().direction = Direction.WEST;
-                    }
-                    else if (this.getPieceToMove().getX_location() < this.getX_direction())
-                    {
-                        this.getPieceToMove().getPiece().direction = Direction.EAST;
-                    }
-                }
-            }
-            else if ((this.getPieceToMove().getY_location() > this.getY_direction()) || (this.getPieceToMove().getY_location() < this.getY_direction()))
-            {
-                 if (this.getX_direction() == this.getPieceToMove().getX_location())
-                {
-                    directionOkay = true;
-                    
-                    if (this.getPieceToMove().getY_location() > this.getY_direction())
-                    {
-                        this.getPieceToMove().getPiece().direction = Direction.SOUTH;
-                    }
-                    else if (this.getPieceToMove().getY_location() < this.getY_direction())
-                    {
-                        this.getPieceToMove().getPiece().direction = Direction.NORTH;
-                    }
-                }
-            }
+            directionOkay = checkDirection.directionRook(board);
         }
         else if (board[this.getPieceToMove().getX_location()][this.getPieceToMove().getY_location()].getPiece().getClass().equals(Knight.class))
         {
-            if (((this.getPieceToMove().getX_location() + 1) == (this.getX_direction())) && ((this.getPieceToMove().getY_location() + 2) == (this.getY_direction())))
-            {
-                directionOkay = true; 
-                this.getPieceToMove().getPiece().direction = Direction.NORTHNORTHEAST;
-            }
-            else if (((this.getPieceToMove().getX_location() + 2) == (this.getX_direction())) && ((this.getPieceToMove().getY_location() + 1) == (this.getY_direction())))
-            {
-                directionOkay = true;
-                this.getPieceToMove().getPiece().direction = Direction.NORTHEASTEAST;
-            }
-            else if (((this.getPieceToMove().getX_location() + 2) == (this.getX_direction())) && ((this.getPieceToMove().getY_location() - 1) == (this.getY_direction())))
-            {
-                directionOkay = true;
-                this.getPieceToMove().getPiece().direction = Direction.SOUTHEASTEAST;
-            }
-            else if (((this.getPieceToMove().getX_location() + 1) == (this.getX_direction())) && ((this.getPieceToMove().getY_location() - 2) == (this.getY_direction())))
-            {
-                directionOkay = true;
-                this.getPieceToMove().getPiece().direction = Direction.SOUTHSOUTHEAST;
-            }
-            else if (((this.getPieceToMove().getX_location() - 1) == (this.getX_direction())) && ((this.getPieceToMove().getY_location() - 2) == (this.getY_direction())))
-            {
-                directionOkay = true;
-                this.getPieceToMove().getPiece().direction = Direction.SOUTHSOUTHWEST;
-            }
-            else if (((this.getPieceToMove().getX_location() - 2) == (this.getX_direction())) && ((this.getPieceToMove().getY_location() - 1) == (this.getY_direction())))
-            {
-                directionOkay = true;
-                this.getPieceToMove().getPiece().direction = Direction.SOUTHWESTWEST;
-            }
-            else if (((this.getPieceToMove().getX_location() - 2) == (this.getX_direction())) && ((this.getPieceToMove().getY_location() + 1) == (this.getY_direction())))
-            {
-                directionOkay = true;
-                this.getPieceToMove().getPiece().direction = Direction.NORTHWESTWEST;
-            }
-            else if (((this.getPieceToMove().getX_location() - 1) == (this.getX_direction())) && ((this.getPieceToMove().getY_location() + 2) == (this.getY_direction())))
-            {
-                directionOkay = true;
-                this.getPieceToMove().getPiece().direction = Direction.NORTHNORTHWEST;
-            }
+            directionOkay = checkDirection.directionKnight(board);
         }
         else if (board[this.getPieceToMove().getX_location()][this.getPieceToMove().getY_location()].getPiece().getClass().equals(Bishop.class))
         {
-            if ((this.getPieceToMove().getX_location() < this.getX_direction()) && (this.getPieceToMove().getY_location() < this.getY_direction()))
-            {
-                if ((this.getX_direction() - this.getPieceToMove().getX_location()) == (this.getY_direction() - this.getPieceToMove().getY_location()))
-                {
-                    directionOkay = true;
-                    this.getPieceToMove().getPiece().direction = Direction.NORTHEAST;
-                }
-            }
-            else if ((this.getPieceToMove().getX_location() < this.getX_direction()) && (this.getPieceToMove().getY_location() > this.getY_direction()))
-            {
-                if ((this.getX_direction() - this.getPieceToMove().getX_location()) == (this.getPieceToMove().getY_location() - this.getY_direction()))
-                {
-                    directionOkay = true;
-                    this.getPieceToMove().getPiece().direction = Direction.SOUTHEAST;
-                }
-            }
-            else if ((this.getPieceToMove().getX_location() > this.getX_direction()) && (this.getPieceToMove().getY_location() > this.getY_direction()))
-            {
-                if ((this.getPieceToMove().getX_location() - this.getX_direction()) == (this.getPieceToMove().getY_location() - this.getY_direction()))
-                {
-                    directionOkay = true;
-                    this.getPieceToMove().getPiece().direction = Direction.SOUTHWEST;
-                }
-            }
-            else if ((this.getPieceToMove().getX_location() > this.getX_direction()) && (this.getPieceToMove().getY_location() < this.getY_direction()))
-            {
-                if ((this.getX_direction()) - this.getPieceToMove().getX_location() == (this.getPieceToMove().getY_location() - this.getY_direction()))
-                {
-                    directionOkay = true;
-                    this.getPieceToMove().getPiece().direction = Direction.NORTHWEST;
-                }
-            }
+            directionOkay = checkDirection.directionBishop(board);
         }
         else if (board[this.getPieceToMove().getX_location()][this.getPieceToMove().getY_location()].getPiece().getClass().equals(Queen.class))
         {
-            if ((this.getPieceToMove().getX_location() > this.getX_direction()) && (this.getPieceToMove().getY_location() == this.getY_direction()))
-            {
-                directionOkay = true;
-                this.getPieceToMove().getPiece().direction = Direction.WEST;             
-            }
-            else if ((this.getPieceToMove().getX_location() < this.getX_direction()) && (this.getPieceToMove().getY_location() == this.getY_direction()))
-            {
-                directionOkay = true;
-                this.getPieceToMove().getPiece().direction = Direction.EAST; 
-            }
-            else if ((this.getPieceToMove().getY_location() > this.getY_direction()) && (this.getPieceToMove().getX_location() == this.getX_direction()))
-            {
-                directionOkay = true;
-                this.getPieceToMove().getPiece().direction = Direction.SOUTH; 
-            }
-            else if ((this.getPieceToMove().getY_location() < this.getY_direction()) && (this.getPieceToMove().getX_location() == this.getX_direction()))
-            {
-                directionOkay = true;
-                this.getPieceToMove().getPiece().direction = Direction.NORTH; 
-            }
-            else if ((this.getPieceToMove().getX_location() < this.getX_direction()) && (this.getPieceToMove().getY_location() < this.getY_direction()))
-            {
-                if ((this.getX_direction() - this.getPieceToMove().getX_location()) == (this.getY_direction() - this.getPieceToMove().getY_location()))
-                {
-                    directionOkay = true;
-                    this.getPieceToMove().getPiece().direction = Direction.NORTHEAST;
-                }
-            }
-            else if ((this.getPieceToMove().getX_location() < this.getX_direction()) && (this.getPieceToMove().getY_location() > this.getY_direction()))
-            {
-                if ((this.getX_direction() - this.getPieceToMove().getX_location()) == (this.getPieceToMove().getY_location() - this.getY_direction()))
-                {
-                    directionOkay = true;
-                    this.getPieceToMove().getPiece().direction = Direction.SOUTHEAST;
-                }
-            }
-            else if ((this.getPieceToMove().getX_location() > this.getX_direction()) && (this.getPieceToMove().getY_location() > this.getY_direction()))
-            {
-                if ((this.getPieceToMove().getX_location() - this.getX_direction()) == (this.getPieceToMove().getY_location() - this.getY_direction()))
-                {
-                    directionOkay = true;
-                    this.getPieceToMove().getPiece().direction = Direction.SOUTHWEST;
-                }
-            }
-            else if ((this.getPieceToMove().getX_location() > this.getX_direction()) && (this.getPieceToMove().getY_location() < this.getY_direction()))
-            {
-                if ((this.getX_direction() - this.getPieceToMove().getX_location()) == (this.getPieceToMove().getY_location() - this.getY_direction()))
-                {
-                    directionOkay = true;
-                    this.getPieceToMove().getPiece().direction = Direction.NORTHWEST;
-                }
-            }
+            directionOkay = checkDirection.directionQueen(board);
         }
         else if (board[this.getPieceToMove().getX_location()][this.getPieceToMove().getY_location()].getPiece().getClass().equals(King.class))
         {
-            if (((this.getPieceToMove().getX_location() + 1) == (this.getX_direction())) && ((this.getPieceToMove().getY_location() == this.getY_direction())))
-            {
-                directionOkay = true;
-                this.getPieceToMove().getPiece().direction = Direction.EAST;
-            }
-            else if (((this.getPieceToMove().getX_location() - 1) == (this.getX_direction())) && ((this.getPieceToMove().getY_location() == this.getY_direction())))
-            {
-                directionOkay = true;
-                this.getPieceToMove().getPiece().direction = Direction.WEST;
-            }
-            else if (((this.getPieceToMove().getY_location() - 1) == (this.getY_direction())) && ((this.getPieceToMove().getX_location() == this.getX_direction())))
-            {
-                directionOkay = true;
-                this.getPieceToMove().getPiece().direction = Direction.SOUTH;
-            }
-            else if (((this.getPieceToMove().getY_location() + 1) == (this.getY_direction())) && ((this.getPieceToMove().getX_location() == this.getX_direction())))
-            {
-                directionOkay = true;
-                this.getPieceToMove().getPiece().direction = Direction.NORTH;
-            }
-            else if ((this.getPieceToMove().getX_location() + 1 == this.getX_direction()) && (this.getPieceToMove().getY_location() + 1 == this.getY_direction()))
-            {
-                if ((this.getX_direction() - this.getPieceToMove().getX_location()) == (this.getY_direction() - this.getPieceToMove().getY_location()))
-                {
-                    directionOkay = true;
-                    this.getPieceToMove().getPiece().direction = Direction.NORTHEAST;
-                }
-            }
-            else if ((this.getPieceToMove().getX_location() + 1 == this.getX_direction()) && (this.getPieceToMove().getY_location() - 1 == this.getY_direction()))
-            {
-                if ((this.getX_direction() - this.getPieceToMove().getX_location()) == (this.getPieceToMove().getY_location() - this.getY_direction()))
-                {
-                    directionOkay = true;
-                    this.getPieceToMove().getPiece().direction = Direction.SOUTHEAST;
-                }
-            }
-            else if ((this.getPieceToMove().getX_location() - 1 == this.getX_direction()) && (this.getPieceToMove().getY_location() - 1 == this.getY_direction()))
-            {
-                if ((this.getPieceToMove().getX_location() - this.getX_direction()) == (this.getPieceToMove().getY_location() - this.getY_direction()))
-                {
-                    directionOkay = true;
-                    this.getPieceToMove().getPiece().direction = Direction.SOUTHWEST;
-                }
-            }
-            else if ((this.getPieceToMove().getX_location() - 1 == this.getX_direction()) && (this.getPieceToMove().getY_location() + 1 == this.getY_direction()))
-            {
-                if ((this.getPieceToMove().getX_location() - this.getX_direction()) == (this.getPieceToMove().getY_location() - this.getY_direction()))
-                {
-                    directionOkay = true;
-                    this.getPieceToMove().getPiece().direction = Direction.NORTHWEST;
-                }
-            }
+            directionOkay = checkDirection.directionKing(board);
         }
         
         return directionOkay;
     }
     
+    
+    /**
+     * This method checks if the destination of the piece to move has an opposing piece. If this is the case, the dead piece and its original locations are stored in the square.
+     * 
+     * @param board
+     * @param deadPieceStore
+     * @return true if an opposing piece was found.
+     */
     public boolean killAndTake(Square[][] board, Square deadPieceStore)
     {
         boolean opposingFound = false;
         
         KillandTakePieces piecesKill = new KillandTakePieces(this.getX_direction(), this.getY_direction());
         
-        if (this.getPieceToMove().getPiece().getClass().equals(Pawn.class))
+        if (board[this.getX_direction()][this.getY_direction()].getPiece() != null)
         {
-            opposingFound = piecesKill.killAndTakePawn(board, this.getPieceToMove(), deadPieceStore);
+            if (board[this.getX_direction()][this.getY_direction()].getPiece().colour != this.getPieceToMove().getPiece().colour)
+            {
+                if (this.getPieceToMove().getPiece().getClass().equals(Pawn.class))
+                {
+                    opposingFound = piecesKill.killAndTakePawn(board, this.getPieceToMove(), deadPieceStore);
+                }
+                else if (this.getPieceToMove().getPiece().getClass().equals(Rook.class))
+                {
+                    opposingFound = piecesKill.killAndTakeRook(board, this.getPieceToMove(), deadPieceStore);
+                }
+                else if (this.getPieceToMove().getPiece().getClass().equals(Knight.class))
+                {
+                    opposingFound = piecesKill.killAndTakeKnight(board, this.getPieceToMove(), deadPieceStore);
+                }
+                else if (this.getPieceToMove().getPiece().getClass().equals(Bishop.class))
+                {
+                    opposingFound = piecesKill.killAndTakeBishop(board, this.getPieceToMove(), deadPieceStore);
+                }
+                else if (this.getPieceToMove().getPiece().getClass().equals(Queen.class))
+                {
+                    opposingFound = piecesKill.killAndTakeQueen(board, this.getPieceToMove(), deadPieceStore);
+                }
+                else if (this.getPieceToMove().getPiece().getClass().equals(King.class))
+                {
+                    opposingFound = piecesKill.killAndTakeKing(board, this.getPieceToMove(), deadPieceStore);
+                }
+            }
         }
-        else if (this.getPieceToMove().getPiece().getClass().equals(Rook.class))
-        {
-            opposingFound = piecesKill.killAndTakeRook(board, this.getPieceToMove(), deadPieceStore);
-        }
-        else if (this.getPieceToMove().getPiece().getClass().equals(Knight.class))
-        {
-            opposingFound = piecesKill.killAndTakeKnight(board, this.getPieceToMove(), deadPieceStore);
-        }
-        else if (this.getPieceToMove().getPiece().getClass().equals(Bishop.class))
-        {
-            opposingFound = piecesKill.killAndTakeBishop(board, this.getPieceToMove(), deadPieceStore);
-        }
-        else if (this.getPieceToMove().getPiece().getClass().equals(Queen.class))
-        {
-            opposingFound = piecesKill.killAndTakeQueen(board, this.getPieceToMove(), deadPieceStore);
-        }
-        else if (this.getPieceToMove().getPiece().getClass().equals(King.class))
-        {
-            opposingFound = piecesKill.killAndTakeKing(board, this.getPieceToMove(), deadPieceStore);
-        }
-        
+      
         return opposingFound;
     }
     
