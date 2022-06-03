@@ -54,8 +54,5 @@ public class Chess2 {
         controller.addView(view);
         view.addController(controller);
         controller.addModel(model);
-         
-        
     }
-    
 }

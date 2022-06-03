@@ -94,7 +94,7 @@ public class ChessGUIView extends JFrame implements Observer{
         startingMessage.setVerticalAlignment(SwingConstants.CENTER);
         startingMessage.setHorizontalAlignment(SwingConstants.CENTER);
         startingMessage.setFont(new Font("Arial", Font.BOLD, 15));
-        startingMessage.setText("<html>Welcome to Chess. <br/>Please input the names of player 1 and 2 (white and black respectively)<br/> and press enter to begin. If you are a returning player, your data will be recorded appropriately.<html>");
+        startingMessage.setText("<html>Welcome to Chess. <br/>Please input the names of player 1 and 2 (white and black respectively)<br/> and press enter to begin. If you are a returning player, your data will be recorded appropriately.<br/>To play, simply click on a piece of your colour and then click a destination for your piece.<br/>Please refer to the rules button while playing for piece movement specifications.<html>");
         this.startingPanel.add(startingMessage, BorderLayout.CENTER);
         
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -302,7 +302,6 @@ public class ChessGUIView extends JFrame implements Observer{
      * @param controller 
      */
     public void addController(ChessGUIController controller) {
-        System.out.println("View      : adding controller");
         
         for (int x = 0; x < 8; x++)
         {
@@ -513,8 +512,7 @@ public class ChessGUIView extends JFrame implements Observer{
                 
                 if (chequeView.getChequeBoolean()[1])
                 {
-                    this.setVisible(false);
-                    dispose();
+                    this.gameEnd(chequeView.getWinnerAndLoser());
                 }   
             }
         }

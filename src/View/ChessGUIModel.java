@@ -168,7 +168,7 @@ public class ChessGUIModel extends Observable{
         }   
     }
     
-    //This is used to record the score of teh player if their score has been initlaized already in the database.
+    //This is used to record the score of the player if their score has been initlaized already in the database.
     public void familiarScore(Player player) throws SQLException
     {
         boolean playerFound = false;

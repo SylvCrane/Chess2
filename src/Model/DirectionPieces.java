@@ -352,7 +352,48 @@ public class DirectionPieces {
         
         return directionOkay;
     }
-
+    
+    public boolean kingNearPosition(Square[][] board)
+    {
+        boolean directionOkay = false;
+        
+        kingNearPosition nearPosition = new kingNearPosition(this.pieceToMove, this.getX_direction(), this.getY_direction(), this.getPlayer());
+        
+        if (this.getPieceToMove().getPiece().direction == Direction.EAST)
+        {
+            directionOkay = nearPosition.kingNearPositionEast(board);
+        }
+        else if (this.getPieceToMove().getPiece().direction == Direction.WEST)
+        {
+            directionOkay = nearPosition.kingNearPositionWest(board);
+        }
+        else if (this.getPieceToMove().getPiece().direction == Direction.NORTH)
+        {
+            directionOkay = nearPosition.kingNearPositionNorth(board);
+        }
+        else if (this.getPieceToMove().getPiece().direction == Direction.SOUTH)
+        {
+            directionOkay = nearPosition.kingNearPositionSouth(board);
+        }
+        else if (this.getPieceToMove().getPiece().direction == Direction.NORTHEAST)
+        {
+            directionOkay = nearPosition.kingNearPositionNorthEast(board);
+        }
+        else if (this.getPieceToMove().getPiece().direction == Direction.SOUTHEAST)
+        {
+            directionOkay = nearPosition.kingNearPositionSouthEast(board);
+        }
+        else if (this.getPieceToMove().getPiece().direction == Direction.SOUTHWEST)
+        {
+            directionOkay = nearPosition.kingNearPositionSouthWest(board);
+        }
+        else if (this.getPieceToMove().getPiece().direction == Direction.NORTHWEST)
+        {
+            directionOkay = nearPosition.kingNearPositionNorthWest(board);
+        }
+        
+        return directionOkay;
+    }
     /**
      * @return the pieceToMove
      */

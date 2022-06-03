@@ -123,84 +123,252 @@ public class Cheque {
     {
         boolean checkMate = false;
         
-        boolean northCheque = true;
-        boolean northEastCheque = true;
-        boolean eastCheque = true;
-        boolean southEastCheque = true;
-        boolean southCheque = true;
-        boolean southWestCheque = true;
-        boolean westCheque = true;
-        boolean northWestCheque = true;
-        
+        boolean northCheque = false;
+        boolean northEastCheque = false;
+        boolean eastCheque = false;
+        boolean southEastCheque = false;
+        boolean southCheque = false;
+        boolean southWestCheque = false;
+        boolean westCheque = false;
+        boolean northWestCheque = false;
         
         int xDirection = this.getxDirection();
         int yDirection = this.getyDirection();
         
+        //WEST CHEQUE
         if ((xDirection - 1) != -1)
         {
             this.setxDirection(xDirection - 1);
-            westCheque = this.checkForCheque(board, player);
+            
+            if (board[this.getxDirection()][this.getyDirection()].getPiece() != null)
+            {
+                if (board[this.getxDirection()][this.getyDirection()].getPiece().colour == player.getColour())
+                {
+                    westCheque = true;
+                }
+                else
+                {
+                    westCheque = this.checkForCheque(board, player);
+                }
+            }
+            else
+            {
+                westCheque = this.checkForCheque(board, player); 
+            }
+            
             this.setxDirection(xDirection);
         }
+        else
+        {
+            westCheque = true;
+        }
         
+        //EAST CHEQUE
         if ((xDirection + 1) != 8)
         {
             this.setxDirection(xDirection + 1);
-            eastCheque = this.checkForCheque(board, player);
+            
+            if (board[this.getxDirection()][this.getyDirection()].getPiece() != null)
+            {
+                if (board[this.getxDirection()][this.getyDirection()].getPiece().colour == player.getColour())
+                {
+                    eastCheque = true;
+                }
+                else
+                {
+                    eastCheque = this.checkForCheque(board, player);
+                }
+            }
+            else
+            {
+                eastCheque = this.checkForCheque(board, player);
+            }
+            
             this.setxDirection(xDirection);
         }
+        else
+        {
+            eastCheque = true;
+        }
         
+        //SOUTH CHEQUE
         if ((yDirection - 1) != -1)
         {
             this.setyDirection(yDirection - 1);
-            southCheque = this.checkForCheque(board, player);
+            
+            if (board[this.getxDirection()][this.getyDirection()].getPiece() != null)
+            {
+                if (board[this.getxDirection()][this.getyDirection()].getPiece().colour == player.getColour())
+                {
+                    southCheque = true;
+                }
+                else
+                {
+                    southCheque = this.checkForCheque(board, player);
+                }
+            }
+            else
+            {
+                southCheque = this.checkForCheque(board, player);
+            }
+            
             this.setyDirection(yDirection);
         }
+        else
+        {
+            southCheque = true;
+        }
         
+        //NORTH CHEQUE
         if ((yDirection + 1) != 8)
         {
             this.setyDirection(yDirection + 1);
-            northCheque = this.checkForCheque(board, player);
+            
+            if (board[this.getxDirection()][this.getyDirection()].getPiece() != null)
+            {
+                if (board[this.getxDirection()][this.getyDirection()].getPiece().colour == player.getColour())
+                {
+                    northCheque = true;
+                }
+                else
+                {
+                    northCheque = this.checkForCheque(board, player);
+                }
+            }
+            else
+            {
+                northCheque = this.checkForCheque(board, player);
+            }
+            
             this.setyDirection(yDirection);
         }
+        else
+        {
+            northCheque = true;
+        }
         
+        //NORTH EAST CHEQUE
         if (((xDirection + 1) != 8) && ((yDirection + 1) != 8))
         {
             this.setxDirection(xDirection + 1);
             this.setyDirection(yDirection + 1);
-            northEastCheque = this.checkForCheque(board, player);
+            
+            if (board[this.getxDirection()][this.getyDirection()].getPiece() != null)
+            {
+                if (board[this.getxDirection()][this.getyDirection()].getPiece().colour == player.getColour())
+                {
+                    northEastCheque = true;
+                }
+                else
+                {
+                    northEastCheque = this.checkForCheque(board, player);
+                }
+            }
+            else
+            {
+               northEastCheque = this.checkForCheque(board, player); 
+            }
+            
             this.setxDirection(xDirection);
             this.setyDirection(yDirection);
         }
+        else
+        {
+            northEastCheque = true;
+        }
         
+        //SOUTH EAST CHEQUE
         if (((xDirection + 1) != 8) && ((yDirection - 1) != -1))
         {
             this.setxDirection(xDirection + 1);
             this.setyDirection(yDirection - 1);
-            southEastCheque = this.checkForCheque(board, player);
+            
+            if (board[this.getxDirection()][this.getyDirection()].getPiece() != null)
+            {
+                if (board[this.getxDirection()][this.getyDirection()].getPiece().colour == player.getColour())
+                {
+                    southEastCheque = true;
+                }
+                else
+                {
+                    southEastCheque = this.checkForCheque(board, player);
+                }
+            }
+            else
+            {
+                southEastCheque = this.checkForCheque(board, player);
+            }
+            
             this.setxDirection(xDirection);
             this.setyDirection(yDirection);
         }
+        else
+        {
+            southEastCheque = true;
+        }
         
+        //SOUTH WEST CHEQUE
         if (((xDirection - 1) != -1) && ((yDirection - 1) != -1))
         {
             this.setxDirection(xDirection - 1);
             this.setyDirection(yDirection - 1);
-            southWestCheque = this.checkForCheque(board, player);
+            
+            if (board[this.getxDirection()][this.getyDirection()].getPiece() != null)
+            {
+                if (board[this.getxDirection()][this.getyDirection()].getPiece().colour == player.getColour())
+                {
+                    southWestCheque = true;
+                }
+                else
+                {
+                    southWestCheque = this.checkForCheque(board, player);
+                }
+            }
+            else
+            {
+                southWestCheque = this.checkForCheque(board, player);
+            }
+            
             this.setxDirection(xDirection);
             this.setyDirection(yDirection);
         }
+        else
+        {
+            southWestCheque = true;
+        }
         
+        
+        //NORTH WEST CHEQUE
         if (((xDirection - 1) != -1) && ((yDirection + 1) != 8))
         {
             this.setxDirection(xDirection - 1);
             this.setyDirection(yDirection + 1);
-            northWestCheque = this.checkForCheque(board, player);
+            
+            if (board[this.getxDirection()][this.getyDirection()].getPiece() != null)
+            {
+                if (board[this.getxDirection()][this.getyDirection()].getPiece().colour == player.getColour())
+                {
+                    northWestCheque = true;
+                }
+                else
+                {
+                    northWestCheque = this.checkForCheque(board, player);
+                }
+            }
+            else
+            {
+                northWestCheque = this.checkForCheque(board, player);
+            }
+            
             this.setxDirection(xDirection);
             this.setyDirection(yDirection);
         }
+        else
+        {
+            northWestCheque = true;
+        }
         
-        if ((!northCheque) && (!northEastCheque) && (!eastCheque) && (!southEastCheque) && (!southCheque) && (!southWestCheque) && (!westCheque) && (!northWestCheque))
+        if ((northCheque) && (northEastCheque) && (eastCheque) && (southEastCheque) && (southCheque) && (southWestCheque) && (westCheque) && (northWestCheque))
         {
             checkMate = true;
         }

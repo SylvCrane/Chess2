@@ -140,18 +140,20 @@ public class chessConnection
      */
     public void writeScores(Player player) throws SQLException
     {
+        int unchangedScore = player.getScore();
         boolean nameCheck = this.nameChecker(player);
+        player.setScore(unchangedScore);
         
         Statement statement = conn.createStatement();
         
         if (nameCheck)
         {
-            String scoreUpdater = "UPDATE USERDATA SET SCORE=" + player.getScore() +" WHERE NAME = "+ player.getName();
+            String scoreUpdater = "UPDATE USERDATA SET SCORE=" + unchangedScore +" WHERE NAME = '"+ player.getName() + "'";
             statement.executeUpdate(scoreUpdater);
         }
         else
         {
-            String scoreUpdater = "INSERT INTO USERDATA VALUES(" + player.getName() +", " + player.getScore() + ")";
+            String scoreUpdater = "INSERT INTO USERDATA VALUES('" + player.getName() +"', " + player.getScore() + ")";
             statement.executeUpdate(scoreUpdater);
         }
         
@@ -296,27 +298,31 @@ public class chessConnection
      * @return 
      */
     public boolean checkTableExisting(String newTableName) {
-        boolean flag = false;
+        boolean tableExists = false;
         
         try {
-            System.out.println("check existing tables.... ");
             String[] types = {"TABLE"};
             DatabaseMetaData dbmd = conn.getMetaData();
-            ResultSet rsDBMeta = dbmd.getTables(null, null, null, null);//types);
-            //Statement dropStatement=null;
+            ResultSet rsDBMeta = dbmd.getTables(null, null, null, null);
+            
             while (rsDBMeta.next()) {
                 String tableName = rsDBMeta.getString("TABLE_NAME");
-                if (tableName.compareToIgnoreCase(newTableName) == 0) {
-                    System.out.println(tableName + "  is there");
-                    flag = true;
+                
+                if (tableName.compareToIgnoreCase(newTableName) == 0) 
+                {
+                    tableExists = true;
                 }
             }
-            if (rsDBMeta != null) {
+            if (rsDBMeta != null) 
+            {
                 rsDBMeta.close();
             }
-        } catch (SQLException ex) {
+        } catch (SQLException ex) 
+        {
+            
         }
-        return flag;
+        
+        return tableExists;
     }
     
 }

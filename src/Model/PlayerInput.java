@@ -28,17 +28,6 @@ public class PlayerInput {
         this.pieceToMove = pieceToMove;
     }
 
-    public boolean playerQuit (String input)
-    {
-        boolean playerQuits = false;
-        
-        if (input.equals("x"))
-        {
-            playerQuits = true;
-        }
-        return playerQuits;
-    }
-
     /**
      * This method identifies if the piece can be moved by the current player by comparing the colour of the piece to the player's assigned colour.
      * 

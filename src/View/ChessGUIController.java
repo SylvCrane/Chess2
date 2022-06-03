@@ -44,9 +44,15 @@ public class ChessGUIController implements ActionListener{
             this.view.getPlayer2().setText(this.view.getPlayer2Field().getText());
             this.view.mainGame();
             
-            model.setPlayer1(new Player(this.view.getPlayer1().getText(), PlayerColour.WHITE, 0));
-            model.setPlayer2(new Player(this.view.getPlayer2().getText(), PlayerColour.BLACK, 0));
-            model.newPlayerTurn();
+            this.model.setPlayer1(new Player(this.view.getPlayer1().getText(), PlayerColour.WHITE, 0));
+            this.model.setPlayer2(new Player(this.view.getPlayer2().getText(), PlayerColour.BLACK, 0));
+            try {
+                this.model.familiarScore(this.model.getPlayer1());
+                this.model.familiarScore(this.model.getPlayer2());
+            } catch (SQLException ex) {
+                Logger.getLogger(ChessGUIController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            this.model.newPlayerTurn();
         }
         else if (buttonName.equals("reset"))
         {

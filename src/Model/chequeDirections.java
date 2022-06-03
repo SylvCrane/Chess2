@@ -124,15 +124,14 @@ public class chequeDirections {
                          {
                              if (northIndex > 1)
                              {
-                                 for (int northIndexProtected = 1; northIndexProtected < northIndex + 1; northIndexProtected++)
+                                 for (int northIndexProtected = 1; northIndexProtected < northIndex; northIndexProtected++)
                                  {
                                      if (board[this.getxDirection()][this.getyDirection() + northIndexProtected].getPiece() != null)
                                      {
-                                          if (board[this.getxDirection()][this.getyDirection() + northIndexProtected].getPiece().colour == this.getPlayer().getColour())
-                                          {
+                                          
                                               northProtected = true;
                                               break;
-                                          }  
+                                           
                                      }
                                  }
                              }
@@ -152,15 +151,14 @@ public class chequeDirections {
                           {
                              if (northIndex > 1)
                              {
-                                 for (int northIndexProtected = 1; northIndexProtected < northIndex + 1; northIndexProtected++)
+                                 for (int northIndexProtected = 1; northIndexProtected < northIndex; northIndexProtected++)
                                  {
                                      if (board[this.getxDirection()][this.getyDirection() + northIndexProtected].getPiece() != null)
                                      {
-                                          if (board[this.getxDirection()][this.getyDirection() + northIndexProtected].getPiece().colour == this.getPlayer().getColour())
-                                          {
+                                          
                                               northProtected = true;
                                               break;
-                                          }  
+                                          
                                      }
                                  }
                              }
@@ -207,15 +205,14 @@ public class chequeDirections {
                         {
                             if (eastIndex > 1)
                             {
-                                for (int eastIndexProtected = 1; eastIndexProtected < eastIndex + 1; eastIndexProtected++)
+                                for (int eastIndexProtected = 1; eastIndexProtected < eastIndex; eastIndexProtected++)
                                 {
                                     if (board[this.getxDirection() + eastIndexProtected][this.getyDirection()].getPiece() != null)
                                     {
-                                        if (board[this.getxDirection() + eastIndexProtected][this.getyDirection()].getPiece().colour == this.getPlayer().getColour())
-                                        {
+                                        
                                             eastProtected = true;
                                             break;
-                                        } 
+                                         
                                     }
                                     
                                 }
@@ -236,15 +233,14 @@ public class chequeDirections {
                         {
                            if (eastIndex > 1)
                             {
-                                for (int eastIndexProtected = 1; eastIndexProtected < eastIndex + 1; eastIndexProtected++)
+                                for (int eastIndexProtected = 1; eastIndexProtected < eastIndex; eastIndexProtected++)
                                 {
                                    if (board[this.getxDirection() + eastIndexProtected][this.getyDirection()].getPiece() != null)
                                     {
-                                        if (board[this.getxDirection() + eastIndexProtected][this.getyDirection()].getPiece().colour == this.getPlayer().getColour())
-                                        {
+                                        
                                             eastProtected = true;
                                             break;
-                                        } 
+                                         
                                     }
                                 }
                             }
@@ -290,15 +286,14 @@ public class chequeDirections {
                         {
                             if (southIndex > 1)
                             {
-                                for (int southIndexProtected = 1; southIndexProtected < southIndex + 1; southIndexProtected++)
+                                for (int southIndexProtected = 1; southIndexProtected < southIndex; southIndexProtected++)
                                 {
                                     if (board[this.getxDirection()][this.getyDirection() - southIndexProtected].getPiece() != null)
                                     {
-                                       if (board[this.getxDirection()][this.getyDirection() - southIndexProtected].getPiece().colour == this.getPlayer().getColour())
-                                        {
+                                       
                                             southProtected = true;
                                             break;
-                                        } 
+                                         
                                     }
                                     
                                 }
@@ -319,15 +314,14 @@ public class chequeDirections {
                         {
                            if (southIndex > 1)
                             {
-                                for (int southIndexProtected = 1; southIndexProtected < southIndex + 1; southIndexProtected++)
+                                for (int southIndexProtected = 1; southIndexProtected < southIndex; southIndexProtected++)
                                 {
                                      if (board[this.getxDirection()][this.getyDirection() - southIndexProtected].getPiece() != null)
                                     {
-                                       if (board[this.getxDirection()][this.getyDirection() - southIndexProtected].getPiece().colour == this.getPlayer().getColour())
-                                        {
+                                       
                                             southProtected = true;
                                             break;
-                                        } 
+                                         
                                     }
                                 }
                             }
@@ -373,15 +367,14 @@ public class chequeDirections {
                         {
                             if (westIndex > 1)
                             {
-                                for (int westIndexProtected = 1; westIndexProtected < westIndex + 1; westIndexProtected++)
+                                for (int westIndexProtected = 1; westIndexProtected < westIndex; westIndexProtected++)
                                 {
                                     if (board[this.getxDirection() - westIndexProtected][this.getyDirection()].getPiece() != null)
                                     {
-                                        if (board[this.getxDirection() - westIndexProtected][this.getyDirection()].getPiece().colour == this.getPlayer().getColour())
-                                        {
+                                        
                                             westProtected = true;
                                             break;
-                                        } 
+                                         
                                     }
                                 }
                             }
@@ -401,15 +394,14 @@ public class chequeDirections {
                         {
                            if (westIndex > 1)
                             {
-                                for (int westIndexProtected = 1; westIndexProtected < westIndex + 1; westIndexProtected++)
+                                for (int westIndexProtected = 1; westIndexProtected < westIndex; westIndexProtected++)
                                 {
                                     if (board[this.getxDirection() - westIndexProtected][this.getyDirection()].getPiece() != null)
                                     {
-                                        if (board[this.getxDirection() - westIndexProtected][this.getyDirection()].getPiece().colour == this.getPlayer().getColour())
-                                        {
+                                        
                                             westProtected = true;
                                             break;
-                                        } 
+                                         
                                     }
                                 }
                             }
@@ -473,15 +465,14 @@ public class chequeDirections {
                         {
                             if (northEastIndex > 1)
                             {
-                                for (int northEastIndexProtected = 1; northEastIndexProtected < northEastIndex + 1; northEastIndexProtected++)
+                                for (int northEastIndexProtected = 1; northEastIndexProtected < northEastIndex; northEastIndexProtected++)
                                 {
                                     if (board[this.getxDirection() + northEastIndexProtected][this.getyDirection() + northEastIndexProtected].getPiece() != null)
                                     {
-                                        if (board[this.getxDirection() + northEastIndexProtected][this.getyDirection() + northEastIndexProtected].getPiece().colour == this.getPlayer().getColour())
-                                        {
+                                        
                                             northeastProtected = true;
                                             break;
-                                        }
+                                        
                                     }
                                 }
                             }
@@ -501,15 +492,14 @@ public class chequeDirections {
                         {
                             if (northEastIndex > 1)
                             {
-                                for (int northEastIndexProtected = 1; northEastIndexProtected < northEastIndex + 1; northEastIndexProtected++)
+                                for (int northEastIndexProtected = 1; northEastIndexProtected < northEastIndex; northEastIndexProtected++)
                                 {
                                     if (board[this.getxDirection() + northEastIndexProtected][this.getyDirection() + northEastIndexProtected].getPiece() != null)
                                     {
-                                        if (board[this.getxDirection() + northEastIndexProtected][this.getyDirection() + northEastIndexProtected].getPiece().colour == this.getPlayer().getColour())
-                                        {
+                                        
                                             northeastProtected = true;
                                             break;
-                                        }
+                                        
                                     }
                                 }
                             }
@@ -574,15 +564,14 @@ public class chequeDirections {
                         {
                             if (southEastIndex > 1)
                             {
-                                for (int southEastIndexProtected = 1; southEastIndexProtected < southEastIndex + 1; southEastIndexProtected++)
+                                for (int southEastIndexProtected = 1; southEastIndexProtected < southEastIndex; southEastIndexProtected++)
                                 {
                                     if (board[this.getxDirection() + southEastIndexProtected][this.getyDirection() - southEastIndexProtected].getPiece() != null)
                                     {
-                                        if (board[this.getxDirection() + southEastIndexProtected][this.getyDirection() - southEastIndexProtected].getPiece().colour == this.getPlayer().getColour())
-                                        {
+                                        
                                             southeastProtected = true;
                                             break;
-                                        } 
+                                         
                                     }
                                    
                                 }
@@ -603,15 +592,14 @@ public class chequeDirections {
                         {
                             if (southEastIndex > 1)
                             {
-                                for (int southEastIndexProtected = 1; southEastIndexProtected < southEastIndex + 1; southEastIndexProtected++)
+                                for (int southEastIndexProtected = 1; southEastIndexProtected < southEastIndex; southEastIndexProtected++)
                                 {
                                     if (board[this.getxDirection() + southEastIndexProtected][this.getyDirection() - southEastIndexProtected].getPiece() != null)
                                     {
-                                        if (board[this.getxDirection() + southEastIndexProtected][this.getyDirection() - southEastIndexProtected].getPiece().colour == this.getPlayer().getColour())
-                                        {
+                                        
                                             southeastProtected = true;
                                             break;
-                                        } 
+                                         
                                     }
                                 }
                             }
@@ -678,15 +666,12 @@ public class chequeDirections {
                         {
                             if (southWestIndex > 1)
                             {
-                                for (int southWestIndexProtected = 1; southWestIndexProtected < southWestIndex + 1; southWestIndexProtected++)
+                                for (int southWestIndexProtected = 1; southWestIndexProtected < southWestIndex; southWestIndexProtected++)
                                 {
                                     if (board[this.getxDirection() - southWestIndexProtected][this.getyDirection() - southWestIndexProtected].getPiece() != null)
                                     {
-                                        if (board[this.getxDirection() - southWestIndexProtected][this.getyDirection() - southWestIndexProtected].getPiece().colour == this.getPlayer().getColour())
-                                        {
-                                            southwestProtected = true;
-                                            break;
-                                        }
+                                        southwestProtected = true;
+                                        break;
                                     }
                                     
                                 }
@@ -707,15 +692,14 @@ public class chequeDirections {
                         {
                             if (southWestIndex > 1)
                             {
-                                for (int southWestIndexProtected = 1; southWestIndexProtected < southWestIndex + 1; southWestIndexProtected++)
+                                for (int southWestIndexProtected = 1; southWestIndexProtected < southWestIndex; southWestIndexProtected++)
                                 {
                                     if (board[this.getxDirection() - southWestIndexProtected][this.getyDirection() - southWestIndexProtected].getPiece() != null)
                                     {
-                                        if (board[this.getxDirection() - southWestIndexProtected][this.getyDirection() - southWestIndexProtected].getPiece().colour == this.getPlayer().getColour())
-                                        {
+                                        
                                             southwestProtected = true;
                                             break;
-                                        }
+                                        
                                     }
                                 }
                             }
@@ -781,15 +765,14 @@ public class chequeDirections {
                         {
                             if (northWestIndex > 1)
                             {
-                                for (int northWestIndexProtected = 1; northWestIndexProtected < northWestIndex + 1; northWestIndexProtected++)
+                                for (int northWestIndexProtected = 1; northWestIndexProtected < northWestIndex; northWestIndexProtected++)
                                 {
                                     if (board[this.getxDirection() - northWestIndexProtected][this.getyDirection() + northWestIndexProtected].getPiece() != null)
                                     {
-                                       if (board[this.getxDirection() - northWestIndexProtected][this.getyDirection() + northWestIndexProtected].getPiece().colour == this.getPlayer().getColour())
-                                        {
+                                       
                                             northwestProtected = true;
                                             break;
-                                        } 
+                                         
                                     }
                                     
                                 }
@@ -810,15 +793,14 @@ public class chequeDirections {
                         {
                             if (northWestIndex > 1)
                             {
-                                for (int northWestIndexProtected = 1; northWestIndexProtected < northWestIndex + 1; northWestIndexProtected++)
+                                for (int northWestIndexProtected = 1; northWestIndexProtected < northWestIndex; northWestIndexProtected++)
                                 {
                                     if (board[this.getxDirection() - northWestIndexProtected][this.getyDirection() + northWestIndexProtected].getPiece() != null)
                                     {
-                                       if (board[this.getxDirection() - northWestIndexProtected][this.getyDirection() + northWestIndexProtected].getPiece().colour == this.getPlayer().getColour())
-                                        {
+                                       
                                             northwestProtected = true;
                                             break;
-                                        } 
+                                        
                                     }
                                 }
                             }
